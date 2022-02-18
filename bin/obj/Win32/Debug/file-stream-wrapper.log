@@ -1,0 +1,13 @@
+﻿  divide-char-vec-to-lines.cpp
+  errors-handler-file-operations.cpp
+  file-operations.cpp
+  file-stream-wrapper-project.cpp
+C:\Development\Projects\My_Libraries\file-stream-wrapper\include\file-service.hpp(185,37): warning C4244: 'argument': conversion from 'std::streamoff' to 'const unsigned int', possible loss of data
+  iserializable.cpp
+  read-serialized-data-file.cpp
+C:\Development\Projects\My_Libraries\file-stream-wrapper\include\file-service.hpp(185,37): warning C4244: 'argument': conversion from 'std::streamoff' to 'const unsigned int', possible loss of data
+C:\Development\Projects\My_Libraries\file-stream-wrapper\src\read-serialized-data-file.cpp(17,41): warning C4244: 'argument': conversion from 'std::streamoff' to 'const unsigned int', possible loss of data
+C:\Development\Projects\My_Libraries\file-stream-wrapper\src\read-serialized-data-file.cpp(31): message : see reference to function template instantiation 'std::vector<unsigned char,std::allocator<unsigned char>> file::ReadSerializedDataFile<unsigned char>(std::basic_ifstream<unsigned char,std::char_traits<unsigned char>> &,std::ios_base::openmode,const std::locale &)' being compiled
+  serialization.cpp
+  Generating Code...
+  file-stream-wrapper.vcxproj -> C:\Development\Projects\My_Libraries\file-stream-wrapper\bin\Win32\Debug\file-stream-wrapper.exe
