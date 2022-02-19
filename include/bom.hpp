@@ -69,7 +69,7 @@ namespace file {
                 file_stream.write(&ByteOrderMark[index][0], ByteOrderMark[index].size());
                 FlushFile(file_stream);
             }
-        }
+        } else { throw ErrorFileStreamIsClosed(); }
     }
 
     // Чтение из файла метки порядка байт в файле Byte Order Mark
@@ -93,7 +93,7 @@ namespace file {
                 return BOMEnum::No_BOM;
                 file_stream.seekg(0, std::ios_base::beg); // Переставить указатель на начало файла
             }
-        }
+        } else { throw ErrorFileStreamIsClosed(); }
     }
 
     // Конвертация Big endian <|> Little endian. Меняет местами 1 и 2 байт в каждых swap_width байтах.

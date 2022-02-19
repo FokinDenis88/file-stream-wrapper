@@ -78,12 +78,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(ProjectDir)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -103,7 +107,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>"C:\Development\Projects\My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\errors-handler-file-operations.obj";"C:\Development\Projects\My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\file-operations.obj";"C:\Development\Projects\My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\serialization.obj";"C:\Development\Projects\My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\iserializable.obj";"C:\Development\Projects\My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\read-serialized-data-file.obj";"C:\Development\Projects\My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\divide-char-vec-to-lines.obj";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>"C:\Development\Projects\!Programming\!My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\errors-handler-file-operations.obj";"C:\Development\Projects\!Programming\!My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\file-operations.obj";"C:\Development\Projects\!Programming\!My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\serialization.obj";"C:\Development\Projects\!Programming\!My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\iserializable.obj";"C:\Development\Projects\!Programming\!My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\read-serialized-data-file.obj";"C:\Development\Projects\!Programming\!My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\divide-char-vec-to-lines.obj";%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -143,7 +147,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>"C:\Development\Projects\My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\errors-handler-file-operations.obj";"C:\Development\Projects\My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\file-operations.obj";"C:\Development\Projects\My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\serialization.obj";"C:\Development\Projects\My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\iserializable.obj";"C:\Development\Projects\My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\read-serialized-data-file.obj";"C:\Development\Projects\My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\divide-char-vec-to-lines.obj";%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>"C:\Development\Projects\!Programming\!My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\errors-handler-file-operations.obj";"C:\Development\Projects\!Programming\!My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\file-operations.obj";"C:\Development\Projects\!Programming\!My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\serialization.obj";"C:\Development\Projects\!Programming\!My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\iserializable.obj";"C:\Development\Projects\!Programming\!My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\read-serialized-data-file.obj";"C:\Development\Projects\!Programming\!My_Libraries\file-stream-wrapper\bin\obj\Win32\Debug\divide-char-vec-to-lines.obj";%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -179,6 +183,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\file-stream-wrapper.vcxproj">
+      <Project>{e728a586-3b65-4b85-82eb-8372b706541e}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

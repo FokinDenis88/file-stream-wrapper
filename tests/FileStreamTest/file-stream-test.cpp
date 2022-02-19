@@ -21,8 +21,8 @@
 #include "read-text-file-thread.hpp"
 #include "write-data-file.hpp"
 #include "write-data-file-thread.hpp"
-#include "write-serialized-data-file-thread.hpp"
 #include "write-serialized-data-file.hpp"
+#include "write-serialized-data-file-thread.hpp"
 #include "write-text-file.hpp"
 #include "write-text-file-big.hpp"
 #include "write-text-file-big-thread.hpp"
@@ -301,8 +301,7 @@ namespace FileStreamTest
         {
             std::string second_func_path = "Files/Test Serialized Char Symbol Adress.dat";
             WriteSerializedDataFileNewThread<unsigned char>(test_serialized_path_char, data_serialized, OpenModeWriteBinaryRewrite);
-            WriteSerializedDataFileNewThread(second_func_path, &data_serialized[0],
-                data_serialized.size(), OpenModeWriteBinaryRewrite);
+            WriteSerializedDataFileNewThread(second_func_path, &data_serialized[0], data_serialized.size(), OpenModeWriteBinaryRewrite);
             auto readed_data = ReadSerializedDataFileNewThread(test_serialized_path_char);
             Assert::IsTrue(data_serialized == readed_data);
             auto readed_data_symbol = ReadSerializedDataFileNewThread(test_serialized_path_char);
