@@ -17,15 +17,15 @@ namespace file {
                                         const std::locale& locale);
 
 
-    // Безопасно открывает файл ассоциированный с файловым потоком. Внимание: Оставлияет поток открытым
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     template<typename FileStreamT = std::ifstream>
     inline void OpenFile(FileStreamT& file_stream, const std::string& file_path, std::ios_base::openmode open_mode = OpenModeReadFromBegin) {
         file_stream.open(file_path, open_mode);
-        // !write_file_stream - перегружает оператор. Эквивалентен fail()
+        // !write_file_stream - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ fail()
         if (file_stream.fail() || !(file_stream.is_open())) { throw ErrorOpenFile(); }
     }
 
-    // Безопасно открывает файл ассоциированный с файловым потоком
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     template<typename FileStreamT = std::ifstream>
     inline FileStreamT OpenFile(const std::string& file_path, std::ios_base::openmode open_mode = OpenModeReadFromBegin) {
         FileStreamT file_stream{};
@@ -33,7 +33,7 @@ namespace file {
         return file_stream;
     }
 
-    // Безопасно закрывает файл ассоциированный с файловым потоком
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     template<typename FileStreamT = std::ifstream>
     inline void CloseFile(FileStreamT& file_stream) {
         if (file_stream.is_open()) {
@@ -42,7 +42,7 @@ namespace file {
         }
     }
 
-    // Существует ли файл по пути path
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ path
     inline bool FileExists(const std::string& path) {
         std::ifstream read_file(path);
         if (read_file) {
@@ -52,47 +52,47 @@ namespace file {
         else { return false; }
     }
 
-    // Переставляем позицию чтения в файле. No checks for file_stream is_open.
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ. No checks for file_stream is_open.
     template<typename FileStreamT = std::ifstream>
     inline void SeekgFilePos(FileStreamT& file_stream, long pos) {
-        if (file_stream.tellg() != pos) { // Переставляем позицию в файле по абсолютному значению позиции в файле
+        if (file_stream.tellg() != pos) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
             file_stream.seekg(pos);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
         }
     }
 
-    // Переставляем позицию чтения в файле. No checks for file_stream is_open.
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ. No checks for file_stream is_open.
     template<typename FileStreamT = std::ifstream>
     inline void SeekgFilePos(FileStreamT& file_stream, long off = 0, std::ios_base::seekdir dir = std::ios_base::beg) {
-        if (file_stream.tellg() != dir + off) { // Переставляем позицию в файле на позицию dir с учетом сдвига off
+        if (file_stream.tellg() != dir + off) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ dir пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ off
             file_stream.seekg(off, dir);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
         }
     }
     template<typename FileStreamT = std::ifstream>
     inline void SeekgFilePosEnd(FileStreamT& file_stream, long off = 0, std::ios_base::seekdir dir = std::ios_base::end) {
-        if (file_stream.tellg() != dir + off) { // Переставляем позицию в файле на позицию dir с учетом сдвига off
+        if (file_stream.tellg() != dir + off) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ dir пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ off
             file_stream.seekg(off, dir);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
         }
     }
 
-    // Переставляем позицию чтения в файле. No checks for file_stream is_open.
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ. No checks for file_stream is_open.
     template<typename FileStreamT = std::ifstream>
     inline void SeekpFilePos(FileStreamT& file_stream, long pos) {
-        if (file_stream.tellp() != pos) { // Переставляем позицию в файле по абсолютному значению позиции в файле
+        if (file_stream.tellp() != pos) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ
             file_stream.seekp(pos);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
         }
     }
 
-    // Переставляем позицию чтения в файле. No checks for file_stream is_open.
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ. No checks for file_stream is_open.
     template<typename FileStreamT = std::ifstream>
     inline void SeekpFilePos(FileStreamT& file_stream, long off = 0, std::ios_base::seekdir dir = std::ios_base::beg) {
-        if (file_stream.tellp() != dir + off) { // Переставляем позицию в файле на позицию dir с учетом сдвига off
+        if (file_stream.tellp() != dir + off) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ dir пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ off
             file_stream.seekp(off, dir);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
         }
     }
-    // Переставляем позицию чтения в файле. No checks for file_stream is_open.
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ. No checks for file_stream is_open.
     template<typename FileStreamT = std::ifstream>
     inline void SeekpFilePosEnd(FileStreamT& file_stream, long off = 0, std::ios_base::seekdir dir = std::ios_base::end) {
-        if (file_stream.tellp() != dir + off) { // Переставляем позицию в файле на позицию dir с учетом сдвига off
+        if (file_stream.tellp() != dir + off) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ dir пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ off
             file_stream.seekp(off, dir);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
         }
     }
@@ -115,7 +115,7 @@ namespace file {
         return pos;
     }
 
-    // Запись информации непосредственно в файл. Перенос из буфера в файл
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ
     template<typename FileStreamT>
     inline void FlushFile(FileStreamT& file_stream) { // default value in forward declaring section
         file_stream.flush();
@@ -123,25 +123,25 @@ namespace file {
     }
 
 
-    // Вычисление размера файла.
-    // return функции можно свободно конвертировать в int или long.
-    // Внимание! По умолчанию Оставляет позицию в файле - в конце строки
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
+    // return пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ int пїЅпїЅпїЅ long.
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ! пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ - пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     template<typename CharT = char, typename FileStreamT = std::ifstream>
     std::fpos<typename std::char_traits<CharT>::state_type>
     inline SizeOfFile(FileStreamT& file_stream, bool save_file_position = true) {
         static_assert(std::is_same<CharT, char>::value || std::is_same<CharT, wchar_t>::value
             || std::is_same<CharT, unsigned char>::value || std::is_same<CharT, std::byte>::value,
             "CharT can be only: char, unsigned char, wchar_t or std::byte");
-        std::fpos<std::char_traits<CharT>::state_type> current;
+        std::fpos<typename std::char_traits<CharT>::state_type> current;
         if (save_file_position) {
             current = file_stream.tellg();               if (!(file_stream.good())) { throw ErrorFileOperation(); }
         }
-        // Не обязательно, но на всякий случай переставляем указатель в начало файла
+        // пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         if (file_stream.tellg() != 0) {
             file_stream.seekg(0, std::ios_base::beg);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
         }
 
-        std::fpos<std::char_traits<CharT>::state_type> begin, end;
+        std::fpos<typename std::char_traits<CharT>::state_type> begin, end;
         begin = file_stream.tellg();                     if (!(file_stream.good())) { throw ErrorFileOperation(); }
         file_stream.seekg(0, std::ios_base::end);        if (!(file_stream.good())) { throw ErrorFileOperation(); }
         end = file_stream.tellg();                       if (!(file_stream.good())) { throw ErrorFileOperation(); }
@@ -153,8 +153,8 @@ namespace file {
         return end - begin;
     }
 
-    // Вычисление размера файла.
-    // return функции можно свободно конвертировать в int или long.
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
+    // return пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ int пїЅпїЅпїЅ long.
     template<typename CharT = char>
     std::fpos<typename std::char_traits<CharT>::state_type>
     inline SizeOfFile(const std::string& file_path) {
@@ -170,7 +170,7 @@ namespace file {
     }
 
 
-    // Копирование файла из пути original в файл copy
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ original пїЅ пїЅпїЅпїЅпїЅ copy
     inline void CopyFile(const std::string& original, const std::string& copy) {
         std::basic_fstream<unsigned char> read_write_file_stream
             = OpenFile<std::basic_fstream<unsigned char>>(original, OpenModeReadBinary);
@@ -178,7 +178,7 @@ namespace file {
             auto size = SizeOfFile<unsigned char>(read_write_file_stream);
             std::vector<unsigned char> file_content{};
             if (size > 0) {
-                if (read_write_file_stream.tellg() != 0) { // Переставляем позицию в файле на начало
+                if (read_write_file_stream.tellg() != 0) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
                     read_write_file_stream.seekg(0, std::ios_base::beg);    if (!(read_write_file_stream.good())) { throw ErrorFileOperation(); }
                 }
 
@@ -195,7 +195,7 @@ namespace file {
         }
     }
 
-    // Очистка файла от содержимого и закрытие файла
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     template<typename CharT = char>
     inline void ClearFileContent(const std::string& file_path) {
         static_assert(std::is_same<CharT, char>::value || std::is_same<CharT, wchar_t>::value, "CharT can be only: char or wchar_t");

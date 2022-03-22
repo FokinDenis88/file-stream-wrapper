@@ -1,20 +1,18 @@
-#ifndef DATATABLE_H
-#define DATATABLE_H
+#ifndef DATA_TABLE_HPP_
+#define DATA_TABLE_HPP_
 
 #include <vector>
 #include <array>
 #include <string>
 #include <tuple>
 
-// Table with data. Header consists of string value. There can be no header. Data is homogeneous in colomn.
-// Не использовать в качестве разделителя пробел и табуляцию
-// У каждого столбца свой тип
+/// Table with data. Header consists of string value. There can be no header. Data is homogeneous in colomn.
 template<typename... ColumnT>
 struct DataTableTuple {
     // Tuple of table. Or in other words row.
-    typedef std::tuple<ColumnT...> RowType;
+    using RowType = typename std::tuple<ColumnT...>;
     // All data rows of table
-    typedef std::vector<RowType> AllRowsType;
+    using AllRowsType = typename std::vector<RowType>;
 
     // Row with names of columns
     // There can be no header in csv table, only data
@@ -26,15 +24,13 @@ struct DataTableTuple {
     //std::vector<std::tuple<ColumnT...>> data_rows;
 };
 
-// Table with data. Header consists of string value. There can be no header. Data is homogeneous in colomn.
-// Не использовать в качестве разделителя пробел и табуляцию
-// Все столбцы одинакового типа
+/// Table with data. Header consists of string value. There can be no header. Data is homogeneous in colomn.
 template<size_t kColumnCount, typename ColumnT = std::string>
 struct DataTableArray {
     // Tuple of table. Or in other words row.
-    typedef std::array<typename ColumnT, kColumnCount> RowType;
+    using RowType = typename std::array<ColumnT, kColumnCount>;
     // All data rows of table
-    typedef std::vector<RowType> AllRowsType;
+    using AllRowsType = typename std::vector<RowType>;
 
     // Row with names of columns
     // There can be no header in csv table, only data
@@ -44,4 +40,4 @@ struct DataTableArray {
     AllRowsType data_rows;
 };
 
-#endif // !DATATABLE_H
+#endif // !DATA_TABLE_HPP_
