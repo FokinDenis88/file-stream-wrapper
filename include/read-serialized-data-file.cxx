@@ -1,18 +1,22 @@
 #ifndef READ_SERIALIZED_DATA_FILE_HPP_
 #define READ_SERIALIZED_DATA_FILE_HPP_
 
+module;
+
 #include <fstream>
 #include <locale>
 #include <type_traits>
 #include <string>
 #include <vector>
 
-#include "file-constants.hpp"
+export module file.read_serialized_data_file;
+
+import file.constants;
 //#include "file-service.hpp"
 
 namespace file {
 
-    // Бинарное чтение объекта из файла: ты читаешь из файла всегда то, что записал.
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
     template <typename ByteT = unsigned char>
     std::vector<ByteT> ReadSerializedDataFile(std::basic_ifstream<ByteT>& read_file_stream,
                                               std::ios_base::openmode open_mode = OpenModeReadBinary,
@@ -24,7 +28,7 @@ namespace file {
         auto size = SizeOfFile<ByteT>(read_file_stream);
         std::vector<ByteT> file_content(size);
         if (size > 0) {
-            if (read_file_stream.tellg() != 0) { // Переставляем позицию в файле на начало
+            if (read_file_stream.tellg() != 0) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
                 read_file_stream.seekg(0, std::ios_base::beg);    if (!(read_file_stream.good())) { throw ErrorFileOperation(); }
             }
 
@@ -35,7 +39,7 @@ namespace file {
         return file_content;
     }
 
-    // Бинарное чтение объекта из файла: ты читаешь из файла всегда то, что записал.
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
     template <typename ByteT = unsigned char>
     std::vector<ByteT> ReadSerializedDataFile(const char* file_path, std::ios_base::openmode open_mode = OpenModeReadBinary,
                                               const std::locale& locale = std::locale()) {
@@ -47,7 +51,7 @@ namespace file {
         return file_content;
     }
 
-    // Бинарное чтение объекта из файла: ты читаешь из файла всегда то, что записал.
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ: пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
     template <typename ByteT = unsigned char>
     std::vector<ByteT> ReadSerializedDataFile(const std::string& file_path, std::ios_base::openmode open_mode = OpenModeReadBinary,
                                               const std::locale& locale = std::locale()) {
