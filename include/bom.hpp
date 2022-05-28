@@ -7,7 +7,7 @@
 
 namespace file {
 
-    // Enum для ByteOrderMark
+    // Enum РґР»СЏ ByteOrderMark
     enum class BOMEnum : size_t {
         UTF_32BE = 0, // Big endian             0
         UTF_32LE, // Little endian          1
@@ -42,7 +42,7 @@ namespace file {
 
     // GetSystemBOM()
 
-    // Возвращает enum с порядком байт характерным для текущей платформы
+    // Р’РѕР·РІСЂР°С‰Р°РµС‚ enum СЃ РїРѕСЂСЏРґРєРѕРј Р±Р°Р№С‚ С…Р°СЂР°РєС‚РµСЂРЅС‹Рј РґР»СЏ С‚РµРєСѓС‰РµР№ РїР»Р°С‚С„РѕСЂРјС‹
     inline SystemEndianness GetSystemEndianness() {
         if constexpr (std::endian::native == std::endian::big && std::endian::native == std::endian::little) {
             // endianness does not matter and all three values, std::endian::little, std::endian::big, and std::endian::native are the same
@@ -60,7 +60,7 @@ namespace file {
         }
     }
 
-    // Запись в файл метку порядка байт в файле Byte Order Mark
+    // Р—Р°РїРёСЃСЊ РІ С„Р°Р№Р» РјРµС‚РєСѓ РїРѕСЂСЏРґРєР° Р±Р°Р№С‚ РІ С„Р°Р№Р»Рµ Byte Order Mark
     template<typename FileStreamT = std::ifstream>
     inline void WriteBOM(FileStreamT& file_stream, const BOMEnum bom) {
         if (file_stream.is_open()) {
@@ -72,7 +72,7 @@ namespace file {
         } else { throw ErrorFileStreamIsClosed(); }
     }
 
-    // Чтение из файла метки порядка байт в файле Byte Order Mark
+    // Р§С‚РµРЅРёРµ РёР· С„Р°Р№Р»Р° РјРµС‚РєРё РїРѕСЂСЏРґРєР° Р±Р°Р№С‚ РІ С„Р°Р№Р»Рµ Byte Order Mark
     template<typename FileStreamT = std::ifstream>
     inline BOMEnum ReadBOM(FileStreamT& file_stream) {
         if (file_stream.is_open()) {
@@ -91,18 +91,18 @@ namespace file {
             else if (readed_data == ByteOrderMark[1]) { return BOMEnum::UTF_32LE; }
             else {
                 return BOMEnum::No_BOM;
-                file_stream.seekg(0, std::ios_base::beg); // Переставить указатель на начало файла
+                file_stream.seekg(0, std::ios_base::beg); // РџРµСЂРµСЃС‚Р°РІРёС‚СЊ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РЅР°С‡Р°Р»Рѕ С„Р°Р№Р»Р°
             }
         } else { throw ErrorFileStreamIsClosed(); }
     }
 
-    // Конвертация Big endian <|> Little endian. Меняет местами 1 и 2 байт в каждых swap_width байтах.
-    // swap_scope - ширина обмена байтами. Например, в векторе поменяются местами каждые 2 байта.
+    // РљРѕРЅРІРµСЂС‚Р°С†РёСЏ Big endian <|> Little endian. РњРµРЅСЏРµС‚ РјРµСЃС‚Р°РјРё 1 Рё 2 Р±Р°Р№С‚ РІ РєР°Р¶РґС‹С… swap_width Р±Р°Р№С‚Р°С….
+    // swap_scope - С€РёСЂРёРЅР° РѕР±РјРµРЅР° Р±Р°Р№С‚Р°РјРё. РќР°РїСЂРёРјРµСЂ, РІ РІРµРєС‚РѕСЂРµ РїРѕРјРµРЅСЏСЋС‚СЃСЏ РјРµСЃС‚Р°РјРё РєР°Р¶РґС‹Рµ 2 Р±Р°Р№С‚Р°.
     template<typename ByteT>
     inline void SwapEndianness(std::vector<ByteT>& data, const size_t swap_scope) {
         /* static_assert(std::is_same<ByteT, unsigned char>::value || std::is_same<ByteT, std::byte>::value,
                        "CharT can be only: unsigned char or std::byte");*/
-        if (swap_scope > 1) { // Когда нужно менять местами 2 и более байта
+        if (swap_scope > 1) { // РљРѕРіРґР° РЅСѓР¶РЅРѕ РјРµРЅСЏС‚СЊ РјРµСЃС‚Р°РјРё 2 Рё Р±РѕР»РµРµ Р±Р°Р№С‚Р°
             {
                 long long sz = data.size();
                 int remainder = std::div(sz, static_cast<long long>(swap_scope)).rem;
@@ -123,7 +123,7 @@ namespace file {
                 i += swap_scope;
             }
         }
-        else if (swap_scope == 1) { // В 1 байте меняются местами все биты. 8 бит становится 1-ым.
+        else if (swap_scope == 1) { // Р’ 1 Р±Р°Р№С‚Рµ РјРµРЅСЏСЋС‚СЃСЏ РјРµСЃС‚Р°РјРё РІСЃРµ Р±РёС‚С‹. 8 Р±РёС‚ СЃС‚Р°РЅРѕРІРёС‚СЃСЏ 1-С‹Рј.
             for (ByteT& elem : data) {
                 elem = ~elem;
                 int a = 0;

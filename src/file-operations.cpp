@@ -2,18 +2,18 @@
 
 namespace file {
 
-    // Запись данных в файл в XML виде
-    // TODO: Проработать запись данных в нотации XML
+    // Р—Р°РїРёСЃСЊ РґР°РЅРЅС‹С… РІ С„Р°Р№Р» РІ XML РІРёРґРµ
+    // TODO: РџСЂРѕСЂР°Р±РѕС‚Р°С‚СЊ Р·Р°РїРёСЃСЊ РґР°РЅРЅС‹С… РІ РЅРѕС‚Р°С†РёРё XML
     void WriteXMLDataInFile() {
 
     }
 
-    // Чтение данных из файла в XML виде
+    // Р§С‚РµРЅРёРµ РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»Р° РІ XML РІРёРґРµ
     void ReadXMLDataFromFile() {
 
     }
 
-    // TODO: Проработать запись данных в нотации JSON
+    // TODO: РџСЂРѕСЂР°Р±РѕС‚Р°С‚СЊ Р·Р°РїРёСЃСЊ РґР°РЅРЅС‹С… РІ РЅРѕС‚Р°С†РёРё JSON
     void WriteJSONDataInFile() {
 
     }
@@ -30,11 +30,11 @@ namespace file {
 
 
 
-// Лучший Tutorial
+// Р›СѓС‡С€РёР№ Tutorial
 // https://www.cplusplus.com/doc/tutorial/files/
 //In case that an object is destroyed while still associated with an open file, the destructor automatically calls the member function close.
 // 
-// Правила записи текста в файл, чтобы данные, которые будут считаны из файла соответствовали данным записанным в файл
+// РџСЂР°РІРёР»Р° Р·Р°РїРёСЃРё С‚РµРєСЃС‚Р° РІ С„Р°Р№Р», С‡С‚РѕР±С‹ РґР°РЅРЅС‹Рµ, РєРѕС‚РѕСЂС‹Рµ Р±СѓРґСѓС‚ СЃС‡РёС‚Р°РЅС‹ РёР· С„Р°Р№Р»Р° СЃРѕРѕС‚РІРµС‚СЃС‚РІРѕРІР°Р»Рё РґР°РЅРЅС‹Рј Р·Р°РїРёСЃР°РЅРЅС‹Рј РІ С„Р°Р№Р»
 // https://en.cppreference.com/w/cpp/io/c/FILE#Binary_and_text_modes
 // 
 // https://www.tutorialspoint.com/cplusplus/cpp_files_streams.htm
@@ -44,9 +44,9 @@ namespace file {
 // 
 //
 
-// << >> Так можно вводить и выводить информацию используя файловые потоки. Они сериализуют данные
+// << >> РўР°Рє РјРѕР¶РЅРѕ РІРІРѕРґРёС‚СЊ Рё РІС‹РІРѕРґРёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ РёСЃРїРѕР»СЊР·СѓСЏ С„Р°Р№Р»РѕРІС‹Рµ РїРѕС‚РѕРєРё. РћРЅРё СЃРµСЂРёР°Р»РёР·СѓСЋС‚ РґР°РЅРЅС‹Рµ
 // 
-// getline - позволяет считывать сразу всю строку file_stream.getline();
+// getline - РїРѕР·РІРѕР»СЏРµС‚ СЃС‡РёС‚С‹РІР°С‚СЊ СЃСЂР°Р·Сѓ РІСЃСЋ СЃС‚СЂРѕРєСѓ file_stream.getline();
 //
 
 
@@ -63,12 +63,12 @@ namespace file {
 // calling any of the previous functions would return true.Note that good and bad are not exact opposites(good checks more state flags at once).
 //
 
-// Информацию можно переносить сначало в буфер файлового потока basic_filebuf. И потом отправлять команды для синхронизации этого буфера с файлом.
+// РРЅС„РѕСЂРјР°С†РёСЋ РјРѕР¶РЅРѕ РїРµСЂРµРЅРѕСЃРёС‚СЊ СЃРЅР°С‡Р°Р»Рѕ РІ Р±СѓС„РµСЂ С„Р°Р№Р»РѕРІРѕРіРѕ РїРѕС‚РѕРєР° basic_filebuf. Р РїРѕС‚РѕРј РѕС‚РїСЂР°РІР»СЏС‚СЊ РєРѕРјР°РЅРґС‹ РґР»СЏ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё СЌС‚РѕРіРѕ Р±СѓС„РµСЂР° СЃ С„Р°Р№Р»РѕРј.
 //
 
 
-// TODO: Доделать шаблонную функцию проверки корректности операций
-// Это нужно переместить в файл заголовка
+// TODO: Р”РѕРґРµР»Р°С‚СЊ С€Р°Р±Р»РѕРЅРЅСѓСЋ С„СѓРЅРєС†РёСЋ РїСЂРѕРІРµСЂРєРё РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё РѕРїРµСЂР°С†РёР№
+// Р­С‚Рѕ РЅСѓР¶РЅРѕ РїРµСЂРµРјРµСЃС‚РёС‚СЊ РІ С„Р°Р№Р» Р·Р°РіРѕР»РѕРІРєР°
 //template<class CharT> bool CheckFileStreamOperation(const std::basic_ios<CharT>& file_stream,
 //    const std::string error_message = "Error in file stream operation") {
 //    if (file_stream.fail()) {
@@ -91,11 +91,11 @@ namespace file {
 //    std::basic_ofstream<CharT> write_file_stream(file_path, open_mode);
 //    write_file_stream.imbue(locale);
 //
-//    // !write_file_stream - перегружает оператор. Эквивалентен fail()
+//    // !write_file_stream - РїРµСЂРµРіСЂСѓР¶Р°РµС‚ РѕРїРµСЂР°С‚РѕСЂ. Р­РєРІРёРІР°Р»РµРЅС‚РµРЅ fail()
 //    if (write_file_stream && write_file_stream.is_open()) {
 //        if (!write_file_stream << file_content) { throw ErrorWriteFile(); }
 //
-//        // Запись информации непосредственно в файл
+//        // Р—Р°РїРёСЃСЊ РёРЅС„РѕСЂРјР°С†РёРё РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РІ С„Р°Р№Р»
 //        if (!write_file_stream.flush()) { throw ErrorWriteFile(); }
 //    } else { throw ErrorOpenFile(); }
 //
@@ -107,12 +107,12 @@ namespace file {
 
 
 
-// Старый код
-//// Рекомендуется для записи текста в файл вместо данной функции использовать WriteDataFile.
-//// Осторожно: Управляющие символы в разных операционных системах могут интерпретироваться по разному.
-//// Ты читаешь из файла не всегда то, что записал
-//// Если запись осуществляется с типом wchar_t, то и file_content Должен содержать литерал L"" или быть wchar_t
-//// Конец массива символов nullterminator '\0' Не записывается
+// РЎС‚Р°СЂС‹Р№ РєРѕРґ
+//// Р РµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ РґР»СЏ Р·Р°РїРёСЃРё С‚РµРєСЃС‚Р° РІ С„Р°Р№Р» РІРјРµСЃС‚Рѕ РґР°РЅРЅРѕР№ С„СѓРЅРєС†РёРё РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ WriteDataFile.
+//// РћСЃС‚РѕСЂРѕР¶РЅРѕ: РЈРїСЂР°РІР»СЏСЋС‰РёРµ СЃРёРјРІРѕР»С‹ РІ СЂР°Р·РЅС‹С… РѕРїРµСЂР°С†РёРѕРЅРЅС‹С… СЃРёСЃС‚РµРјР°С… РјРѕРіСѓС‚ РёРЅС‚РµСЂРїСЂРµС‚РёСЂРѕРІР°С‚СЊСЃСЏ РїРѕ СЂР°Р·РЅРѕРјСѓ.
+//// РўС‹ С‡РёС‚Р°РµС€СЊ РёР· С„Р°Р№Р»Р° РЅРµ РІСЃРµРіРґР° С‚Рѕ, С‡С‚Рѕ Р·Р°РїРёСЃР°Р»
+//// Р•СЃР»Рё Р·Р°РїРёСЃСЊ РѕСЃСѓС‰РµСЃС‚РІР»СЏРµС‚СЃСЏ СЃ С‚РёРїРѕРј wchar_t, С‚Рѕ Рё file_content Р”РѕР»Р¶РµРЅ СЃРѕРґРµСЂР¶Р°С‚СЊ Р»РёС‚РµСЂР°Р» L"" РёР»Рё Р±С‹С‚СЊ wchar_t
+//// РљРѕРЅРµС† РјР°СЃСЃРёРІР° СЃРёРјРІРѕР»РѕРІ nullterminator '\0' РќРµ Р·Р°РїРёСЃС‹РІР°РµС‚СЃСЏ
 //template<typename CharT = char>
 //void WriteTextInFileCharTArray(const std::string& file_path, const std::basic_string<CharT>& file_content,
 //    std::ios_base::openmode open_mode = OpenModeWriteAppend, const std::locale& locale = std::locale()) {
@@ -120,21 +120,21 @@ namespace file {
 //    OpenFile(write_file_stream, file_path, open_mode);
 //    write_file_stream.imbue(locale);
 //
-//    // write - записывает массив символов первого аргумента, количество символов второго аргумента
+//    // write - Р·Р°РїРёСЃС‹РІР°РµС‚ РјР°СЃСЃРёРІ СЃРёРјРІРѕР»РѕРІ РїРµСЂРІРѕРіРѕ Р°СЂРіСѓРјРµРЅС‚Р°, РєРѕР»РёС‡РµСЃС‚РІРѕ СЃРёРјРІРѕР»РѕРІ РІС‚РѕСЂРѕРіРѕ Р°СЂРіСѓРјРµРЅС‚Р°
 //    write_file_stream.write(file_content.data(), file_content.size());
 //    if (write_file_stream.bad()) { throw ErrorWriteFile(); }
 //
-//    // Запись информации непосредственно в файл
+//    // Р—Р°РїРёСЃСЊ РёРЅС„РѕСЂРјР°С†РёРё РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РІ С„Р°Р№Р»
 //    write_file_stream.flush();
 //    if (!write_file_stream) { throw ErrorWriteFile(); }
 //    CloseFile(write_file_stream);
 //}
 //
-//// Рекомендуется для записи текста в файл вместо данной функции использовать WriteDataFile.
-//// Осторожно: Управляющие символы в разных операционных системах могут интерпретироваться по разному.
-//// Ты читаешь из файла не всегда то, что записал
-//// Если запись осуществляется с типом wchar_t, то и file_content Должен содержать литерал L"" или быть wchar_t
-//// Конец массива символов nullterminator '\0' Не записывается
+//// Р РµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ РґР»СЏ Р·Р°РїРёСЃРё С‚РµРєСЃС‚Р° РІ С„Р°Р№Р» РІРјРµСЃС‚Рѕ РґР°РЅРЅРѕР№ С„СѓРЅРєС†РёРё РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ WriteDataFile.
+//// РћСЃС‚РѕСЂРѕР¶РЅРѕ: РЈРїСЂР°РІР»СЏСЋС‰РёРµ СЃРёРјРІРѕР»С‹ РІ СЂР°Р·РЅС‹С… РѕРїРµСЂР°С†РёРѕРЅРЅС‹С… СЃРёСЃС‚РµРјР°С… РјРѕРіСѓС‚ РёРЅС‚РµСЂРїСЂРµС‚РёСЂРѕРІР°С‚СЊСЃСЏ РїРѕ СЂР°Р·РЅРѕРјСѓ.
+//// РўС‹ С‡РёС‚Р°РµС€СЊ РёР· С„Р°Р№Р»Р° РЅРµ РІСЃРµРіРґР° С‚Рѕ, С‡С‚Рѕ Р·Р°РїРёСЃР°Р»
+//// Р•СЃР»Рё Р·Р°РїРёСЃСЊ РѕСЃСѓС‰РµСЃС‚РІР»СЏРµС‚СЃСЏ СЃ С‚РёРїРѕРј wchar_t, С‚Рѕ Рё file_content Р”РѕР»Р¶РµРЅ СЃРѕРґРµСЂР¶Р°С‚СЊ Р»РёС‚РµСЂР°Р» L"" РёР»Рё Р±С‹С‚СЊ wchar_t
+//// РљРѕРЅРµС† РјР°СЃСЃРёРІР° СЃРёРјРІРѕР»РѕРІ nullterminator '\0' РќРµ Р·Р°РїРёСЃС‹РІР°РµС‚СЃСЏ
 //// This function is not overloaded for the types signed char or unsigned char
 //template<typename CharT = char>
 //void WriteTextInFileCharTArray(const char(&file_path)[], const CharT(&file_content)[], std::ios_base::openmode open_mode = OpenModeWriteAppend,
@@ -142,10 +142,10 @@ namespace file {
 //    WriteTextInFileCharTArray(std::string(file_path), std::basic_string<CharT>(file_content), open_mode);
 //}
 
-// Построчное чтение текстового файла. Рекомендуется для записи текста в файл вместо данной функции использовать ReadAllTextFromFile.
-// Осторожно: Управляющие символы в разных операционных системах могут интерпретироваться по разному.
-// Ты читаешь из файла не всегда то, что записал
-// Чтение осуществляется сразу в basic_string<CharT>, без nullterminator '\0'
+// РџРѕСЃС‚СЂРѕС‡РЅРѕРµ С‡С‚РµРЅРёРµ С‚РµРєСЃС‚РѕРІРѕРіРѕ С„Р°Р№Р»Р°. Р РµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ РґР»СЏ Р·Р°РїРёСЃРё С‚РµРєСЃС‚Р° РІ С„Р°Р№Р» РІРјРµСЃС‚Рѕ РґР°РЅРЅРѕР№ С„СѓРЅРєС†РёРё РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ ReadAllTextFromFile.
+// РћСЃС‚РѕСЂРѕР¶РЅРѕ: РЈРїСЂР°РІР»СЏСЋС‰РёРµ СЃРёРјРІРѕР»С‹ РІ СЂР°Р·РЅС‹С… РѕРїРµСЂР°С†РёРѕРЅРЅС‹С… СЃРёСЃС‚РµРјР°С… РјРѕРіСѓС‚ РёРЅС‚РµСЂРїСЂРµС‚РёСЂРѕРІР°С‚СЊСЃСЏ РїРѕ СЂР°Р·РЅРѕРјСѓ.
+// РўС‹ С‡РёС‚Р°РµС€СЊ РёР· С„Р°Р№Р»Р° РЅРµ РІСЃРµРіРґР° С‚Рѕ, С‡С‚Рѕ Р·Р°РїРёСЃР°Р»
+// Р§С‚РµРЅРёРµ РѕСЃСѓС‰РµСЃС‚РІР»СЏРµС‚СЃСЏ СЃСЂР°Р·Сѓ РІ basic_string<CharT>, Р±РµР· nullterminator '\0'
 //template<typename CharT = char>
 //std::basic_string<CharT> ReadTextFromFileCharTArray(const std::string& file_path, std::ios_base::openmode open_mode = OpenModeReadFromBegin,
 //    const std::locale& locale = std::locale()) {
@@ -161,13 +161,13 @@ namespace file {
 //
 //    CloseFile(read_file_stream);
 //    return file_content;
-//    // Правила записи текста в файл, чтобы данные, которые будут считаны из файла соответствовали данным записанным в файл
+//    // РџСЂР°РІРёР»Р° Р·Р°РїРёСЃРё С‚РµРєСЃС‚Р° РІ С„Р°Р№Р», С‡С‚РѕР±С‹ РґР°РЅРЅС‹Рµ, РєРѕС‚РѕСЂС‹Рµ Р±СѓРґСѓС‚ СЃС‡РёС‚Р°РЅС‹ РёР· С„Р°Р№Р»Р° СЃРѕРѕС‚РІРµС‚СЃС‚РІРѕРІР°Р»Рё РґР°РЅРЅС‹Рј Р·Р°РїРёСЃР°РЅРЅС‹Рј РІ С„Р°Р№Р»
 //    // https://en.cppreference.com/w/cpp/io/c/FILE#Binary_and_text_modes
 //}
 
 
 
-// Чтение файла с помощью getline
+// Р§С‚РµРЅРёРµ С„Р°Р№Р»Р° СЃ РїРѕРјРѕС‰СЊСЋ getline
 //template<typename CharT = char, typename ReturnT = std::basic_string<CharT>>
 //ReturnT ReadAllTextFromFile(const char* file_path, std::ios_base::openmode open_mode = OpenModeReadFromBegin,
 //    const std::locale& locale = std::locale()) {

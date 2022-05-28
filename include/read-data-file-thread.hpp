@@ -13,8 +13,8 @@
 
 namespace file {
 
-    // TODO: Может быть при чтении не нужно делать detach потока. Используется только join?
-    // Запускает ReadAllTextFromFile в новом потоке. join - будет ли основной поток ждать файловый поток
+    // TODO: РњРѕР¶РµС‚ Р±С‹С‚СЊ РїСЂРё С‡С‚РµРЅРёРё РЅРµ РЅСѓР¶РЅРѕ РґРµР»Р°С‚СЊ detach РїРѕС‚РѕРєР°. РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ join?
+    // Р—Р°РїСѓСЃРєР°РµС‚ ReadAllTextFromFile РІ РЅРѕРІРѕРј РїРѕС‚РѕРєРµ. join - Р±СѓРґРµС‚ Р»Рё РѕСЃРЅРѕРІРЅРѕР№ РїРѕС‚РѕРє Р¶РґР°С‚СЊ С„Р°Р№Р»РѕРІС‹Р№ РїРѕС‚РѕРє
     template<typename CharT = char, typename ContentT>
     void ReadDataFileNewThreadFunc(const char* file_path, std::promise<ContentT>& result,
                                     std::ios_base::openmode open_mode = OpenModeReadFromBegin,
@@ -23,8 +23,8 @@ namespace file {
         result.set_value(ReadTextFile<CharT, ContentT>(file_path, open_mode, locale));
     }
 
-    // TODO: Может быть при чтении не нужно делать detach потока. Используется только join?
-    // Запускает ReadAllTextFromFile в новом потоке. join - будет ли основной поток ждать файловый поток
+    // TODO: РњРѕР¶РµС‚ Р±С‹С‚СЊ РїСЂРё С‡С‚РµРЅРёРё РЅРµ РЅСѓР¶РЅРѕ РґРµР»Р°С‚СЊ detach РїРѕС‚РѕРєР°. РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ join?
+    // Р—Р°РїСѓСЃРєР°РµС‚ ReadAllTextFromFile РІ РЅРѕРІРѕРј РїРѕС‚РѕРєРµ. join - Р±СѓРґРµС‚ Р»Рё РѕСЃРЅРѕРІРЅРѕР№ РїРѕС‚РѕРє Р¶РґР°С‚СЊ С„Р°Р№Р»РѕРІС‹Р№ РїРѕС‚РѕРє
     template<typename CharT = char, typename ContentT>
     ContentT ReadDataFileNewThread(const char* file_path, std::ios_base::openmode open_mode = OpenModeReadFromBegin,
                                     const std::locale& locale = std::locale(), const bool join = true) {
@@ -39,7 +39,7 @@ namespace file {
         return result_futures.get();
     }
 
-    // Запускает ReadAllTextFromFile в новом потоке. join - будет ли основной поток ждать файловый поток
+    // Р—Р°РїСѓСЃРєР°РµС‚ ReadAllTextFromFile РІ РЅРѕРІРѕРј РїРѕС‚РѕРєРµ. join - Р±СѓРґРµС‚ Р»Рё РѕСЃРЅРѕРІРЅРѕР№ РїРѕС‚РѕРє Р¶РґР°С‚СЊ С„Р°Р№Р»РѕРІС‹Р№ РїРѕС‚РѕРє
     template<typename CharT = char, typename ContentT>
     ContentT ReadDataFileNewThread(const std::string& file_path, std::ios_base::openmode open_mode = OpenModeReadFromBegin,
                                     const std::locale& locale = std::locale(), const bool join = true) {

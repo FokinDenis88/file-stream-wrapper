@@ -22,7 +22,7 @@ namespace file {
         }
     }
 
-    // Бинарное неформатированное чтение файла по строкам
+    // Р‘РёРЅР°СЂРЅРѕРµ РЅРµС„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅРѕРµ С‡С‚РµРЅРёРµ С„Р°Р№Р»Р° РїРѕ СЃС‚СЂРѕРєР°Рј
     // If there is sequence of chars \r\n; \r will be stored in returned value
     template <typename CharT = char>
     std::vector<std::basic_string<CharT>>
@@ -51,7 +51,7 @@ namespace file {
     }
     
 
-    // Бинарное неформатированное чтение файла по строкам
+    // Р‘РёРЅР°СЂРЅРѕРµ РЅРµС„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅРѕРµ С‡С‚РµРЅРёРµ С„Р°Р№Р»Р° РїРѕ СЃС‚СЂРѕРєР°Рј
     // If there is sequence of chars \r\n; \r will be stored in returned value
     template <typename CharT = char>
     std::vector<std::basic_string<CharT>> 
@@ -65,7 +65,7 @@ namespace file {
         return file_content;
     }
 
-    // Бинарное неформатированное чтение файла по строкам.
+    // Р‘РёРЅР°СЂРЅРѕРµ РЅРµС„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅРѕРµ С‡С‚РµРЅРёРµ С„Р°Р№Р»Р° РїРѕ СЃС‚СЂРѕРєР°Рј.
     // If there is sequence of chars \r\n; \r will be stored in returned value
     // delete_r option helps to delete additional char
     template <typename CharT = char>
@@ -78,7 +78,7 @@ namespace file {
     }
 
 
-    // Служебная функция, возвращает символ новой строки в char или wchar_t
+    // РЎР»СѓР¶РµР±РЅР°СЏ С„СѓРЅРєС†РёСЏ, РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРёРјРІРѕР» РЅРѕРІРѕР№ СЃС‚СЂРѕРєРё РІ char РёР»Рё wchar_t
     template<typename CharT = char>
     inline CharT NewLineChar() {
         static_assert(std::is_same<CharT, char>::value || std::is_same<CharT, wchar_t>::value ||
@@ -86,13 +86,13 @@ namespace file {
         return '\n';
     }
 
-    // Служебная функция, возвращает символ новой строки в char или wchar_t
+    // РЎР»СѓР¶РµР±РЅР°СЏ С„СѓРЅРєС†РёСЏ, РІРѕР·РІСЂР°С‰Р°РµС‚ СЃРёРјРІРѕР» РЅРѕРІРѕР№ СЃС‚СЂРѕРєРё РІ char РёР»Рё wchar_t
     template<>
     inline wchar_t NewLineChar<wchar_t>() {
         return L'\n';
     }
 
-    // Бинарное неформатированное чтение файла по строкам и их конкатенация в одну строку
+    // Р‘РёРЅР°СЂРЅРѕРµ РЅРµС„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅРѕРµ С‡С‚РµРЅРёРµ С„Р°Р№Р»Р° РїРѕ СЃС‚СЂРѕРєР°Рј Рё РёС… РєРѕРЅРєР°С‚РµРЅР°С†РёСЏ РІ РѕРґРЅСѓ СЃС‚СЂРѕРєСѓ
     // If there is sequence of chars \r\n; \r will be stored in returned value
     template <typename CharT = char>
     std::basic_string<CharT>
@@ -113,7 +113,7 @@ namespace file {
         return one_line;
     }
 
-    // Бинарное неформатированное чтение файла по строкам и их конкатенация в одну строку
+    // Р‘РёРЅР°СЂРЅРѕРµ РЅРµС„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅРѕРµ С‡С‚РµРЅРёРµ С„Р°Р№Р»Р° РїРѕ СЃС‚СЂРѕРєР°Рј Рё РёС… РєРѕРЅРєР°С‚РµРЅР°С†РёСЏ РІ РѕРґРЅСѓ СЃС‚СЂРѕРєСѓ
     // If there is sequence of chars \r\n; \r will be stored in returned value
     // delete_r option helps to delete additional char
     template <typename CharT = char>

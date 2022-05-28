@@ -22,7 +22,7 @@
 //#include "ReadBinaryFileThread.h"
 #include "data-table.hpp"
 
-// TODO: Реализовать Неформатированное чтение и запись файлов csv. Функции должны подходить для любых шаблонов csv файла.
+// TODO: Р РµР°Р»РёР·РѕРІР°С‚СЊ РќРµС„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅРѕРµ С‡С‚РµРЅРёРµ Рё Р·Р°РїРёСЃСЊ С„Р°Р№Р»РѕРІ csv. Р¤СѓРЅРєС†РёРё РґРѕР»Р¶РЅС‹ РїРѕРґС…РѕРґРёС‚СЊ РґР»СЏ Р»СЋР±С‹С… С€Р°Р±Р»РѕРЅРѕРІ csv С„Р°Р№Р»Р°.
 
 namespace file {
 
@@ -35,7 +35,7 @@ namespace file {
     const char* const kDataCellErrorMessage{ "Empty Data Cell. Not all cells in data table has data." };
 
 
-    // Заменяет запятую
+    // Р—Р°РјРµРЅСЏРµС‚ Р·Р°РїСЏС‚СѓСЋ
     inline std::string ReplaceComma(const std::string& str) {
         return boost::regex_replace(str, boost::regex(","), ".");
     }
@@ -66,11 +66,11 @@ namespace file {
     }
 
     // Realization of formatted input
-    // Реализация чтения текстовой информации из файл через оператор >>
-    // Осторожно: Управляющие символы в разных операционных системах могут интерпретироваться по разному.
-    // Ты читаешь из файла не всегда то, что записал
+    // Р РµР°Р»РёР·Р°С†РёСЏ С‡С‚РµРЅРёСЏ С‚РµРєСЃС‚РѕРІРѕР№ РёРЅС„РѕСЂРјР°С†РёРё РёР· С„Р°Р№Р» С‡РµСЂРµР· РѕРїРµСЂР°С‚РѕСЂ >>
+    // РћСЃС‚РѕСЂРѕР¶РЅРѕ: РЈРїСЂР°РІР»СЏСЋС‰РёРµ СЃРёРјРІРѕР»С‹ РІ СЂР°Р·РЅС‹С… РѕРїРµСЂР°С†РёРѕРЅРЅС‹С… СЃРёСЃС‚РµРјР°С… РјРѕРіСѓС‚ РёРЅС‚РµСЂРїСЂРµС‚РёСЂРѕРІР°С‚СЊСЃСЏ РїРѕ СЂР°Р·РЅРѕРјСѓ.
+    // РўС‹ С‡РёС‚Р°РµС€СЊ РёР· С„Р°Р№Р»Р° РЅРµ РІСЃРµРіРґР° С‚Рѕ, С‡С‚Рѕ Р·Р°РїРёСЃР°Р»
     // Delimiter in csv file between columns must be white space
-    // Не использовать в качестве разделителя пробел и табуляцию
+    // РќРµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РІ РєР°С‡РµСЃС‚РІРµ СЂР°Р·РґРµР»РёС‚РµР»СЏ РїСЂРѕР±РµР» Рё С‚Р°Р±СѓР»СЏС†РёСЋ
     template<typename... ColumnT>
     DataTableTuple<ColumnT...> ReadFormattedDataTableCSV(const char* file_path) {
         std::string str_data{ std::move(MakeStringFrmVectorByte(ReadBinaryFile<char>(file_path))) };
@@ -110,7 +110,7 @@ namespace file {
         return data_table;
     }
 
-    // Используется, если путь к файлу - это объект типа std::string
+    // РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ - СЌС‚Рѕ РѕР±СЉРµРєС‚ С‚РёРїР° std::string
     template<typename... ColumnT>
     DataTableTuple<ColumnT...> ReadFormattedDataTableCSV(const std::string& file_path) {
         return ReadFormattedDataTableCSV<ColumnT...>(file_path.c_str());
@@ -143,11 +143,11 @@ namespace file {
     }
 
     // Realization of formatted input
-    // Реализация чтения текстовой информации из файл через оператор >>
-    // Осторожно: Управляющие символы в разных операционных системах могут интерпретироваться по разному.
-    // Ты читаешь из файла не всегда то, что записал
+    // Р РµР°Р»РёР·Р°С†РёСЏ С‡С‚РµРЅРёСЏ С‚РµРєСЃС‚РѕРІРѕР№ РёРЅС„РѕСЂРјР°С†РёРё РёР· С„Р°Р№Р» С‡РµСЂРµР· РѕРїРµСЂР°С‚РѕСЂ >>
+    // РћСЃС‚РѕСЂРѕР¶РЅРѕ: РЈРїСЂР°РІР»СЏСЋС‰РёРµ СЃРёРјРІРѕР»С‹ РІ СЂР°Р·РЅС‹С… РѕРїРµСЂР°С†РёРѕРЅРЅС‹С… СЃРёСЃС‚РµРјР°С… РјРѕРіСѓС‚ РёРЅС‚РµСЂРїСЂРµС‚РёСЂРѕРІР°С‚СЊСЃСЏ РїРѕ СЂР°Р·РЅРѕРјСѓ.
+    // РўС‹ С‡РёС‚Р°РµС€СЊ РёР· С„Р°Р№Р»Р° РЅРµ РІСЃРµРіРґР° С‚Рѕ, С‡С‚Рѕ Р·Р°РїРёСЃР°Р»
     // Delimiter in csv file between columns must be white space
-    // Не использовать в качестве разделителя пробел и табуляцию
+    // РќРµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РІ РєР°С‡РµСЃС‚РІРµ СЂР°Р·РґРµР»РёС‚РµР»СЏ РїСЂРѕР±РµР» Рё С‚Р°Р±СѓР»СЏС†РёСЋ
     template<size_t kColumnCount, typename ColumnT = std::string>
     DataTableArray<kColumnCount, ColumnT> ReadFormattedDataTableCSV(const char* file_path) {
         std::string str_data{ std::move(MakeStringFrmVectorByte(ReadBinaryFile<char>(file_path))) };
@@ -189,7 +189,7 @@ namespace file {
         return data_table;
     }
 
-    // Используется, если путь к файлу - это объект типа std::string
+    // РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ - СЌС‚Рѕ РѕР±СЉРµРєС‚ С‚РёРїР° std::string
     template<size_t kColumnCount, typename ColumnT = std::string>
     DataTableArray<kColumnCount, ColumnT> ReadFormattedDataTableCSV(const std::string& file_path) {
         return ReadFormattedDataTableCSV<kColumnCount, ColumnT>(file_path.c_str());

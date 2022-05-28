@@ -14,8 +14,8 @@
 
 namespace file {
 
-    // TODO: Может быть при чтении не нужно делать detach потока. Используется только join?
-       // Запускает ReadTextFile в новом потоке. join - будет ли основной поток ждать файловый поток
+    // TODO: РњРѕР¶РµС‚ Р±С‹С‚СЊ РїСЂРё С‡С‚РµРЅРёРё РЅРµ РЅСѓР¶РЅРѕ РґРµР»Р°С‚СЊ detach РїРѕС‚РѕРєР°. РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ join?
+       // Р—Р°РїСѓСЃРєР°РµС‚ ReadTextFile РІ РЅРѕРІРѕРј РїРѕС‚РѕРєРµ. join - Р±СѓРґРµС‚ Р»Рё РѕСЃРЅРѕРІРЅРѕР№ РїРѕС‚РѕРє Р¶РґР°С‚СЊ С„Р°Р№Р»РѕРІС‹Р№ РїРѕС‚РѕРє
    template<typename ByteT = unsigned char>
    inline void ReadSerializedDataFileNewThreadFunc(const char* file_path, std::promise<std::vector<ByteT>>& result,
                                                    std::ios_base::openmode open_mode = OpenModeReadBinary,
@@ -25,8 +25,8 @@ namespace file {
        result.set_value(ReadSerializedDataFile<ByteT>(file_path, open_mode, locale));
    }
 
-    // TODO: Может быть при чтении не нужно делать detach потока. Используется только join?
-    // Запускает ReadTextFile в новом потоке. join - будет ли основной поток ждать файловый поток
+    // TODO: РњРѕР¶РµС‚ Р±С‹С‚СЊ РїСЂРё С‡С‚РµРЅРёРё РЅРµ РЅСѓР¶РЅРѕ РґРµР»Р°С‚СЊ detach РїРѕС‚РѕРєР°. РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ С‚РѕР»СЊРєРѕ join?
+    // Р—Р°РїСѓСЃРєР°РµС‚ ReadTextFile РІ РЅРѕРІРѕРј РїРѕС‚РѕРєРµ. join - Р±СѓРґРµС‚ Р»Рё РѕСЃРЅРѕРІРЅРѕР№ РїРѕС‚РѕРє Р¶РґР°С‚СЊ С„Р°Р№Р»РѕРІС‹Р№ РїРѕС‚РѕРє
     template<typename ByteT = unsigned char>
     inline std::vector<ByteT>
     ReadSerializedDataFileNewThread(const char* file_path, std::ios_base::openmode open_mode = OpenModeReadBinary,
@@ -43,7 +43,7 @@ namespace file {
        return result_futures.get();
    }
 
-    // Запускает ReadTextFile в новом потоке. join - будет ли основной поток ждать файловый поток
+    // Р—Р°РїСѓСЃРєР°РµС‚ ReadTextFile РІ РЅРѕРІРѕРј РїРѕС‚РѕРєРµ. join - Р±СѓРґРµС‚ Р»Рё РѕСЃРЅРѕРІРЅРѕР№ РїРѕС‚РѕРє Р¶РґР°С‚СЊ С„Р°Р№Р»РѕРІС‹Р№ РїРѕС‚РѕРє
     template<typename ByteT = unsigned char>
     inline std::vector<ByteT>
     ReadSerializedDataFileNewThread(const std::string& file_path, std::ios_base::openmode open_mode = OpenModeReadBinary,

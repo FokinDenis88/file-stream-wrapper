@@ -26,16 +26,16 @@ namespace file {
     }
 
 
-    //--------------------------------Указатель на первый байт объекта
+    //--------------------------------РЈРєР°Р·Р°С‚РµР»СЊ РЅР° РїРµСЂРІС‹Р№ Р±Р°Р№С‚ РѕР±СЉРµРєС‚Р°
 
     template<typename ByteT>
     concept IsByte = std::is_same_v<ByteT, unsigned char> || std::is_same_v<ByteT, std::byte>;
 
-    // Бинарная запись объекта в файл: ты читаешь из файла всегда то, что записал.
-    // Нужно использовать специальный режим открытия для бинарных файлов. OpenModeWriteBinaryAppend или OpenModeWriteBinaryRewrite.
-    // first_object_symbol - Это указатель на первый символ или первую область памяти объекта.
-    // Например, указатель на первый элемент массива. reinterpret_cast<ByteT*>(&object[0])
-    // object_size - количество байт, которые занимает объект
+    // Р‘РёРЅР°СЂРЅР°СЏ Р·Р°РїРёСЃСЊ РѕР±СЉРµРєС‚Р° РІ С„Р°Р№Р»: С‚С‹ С‡РёС‚Р°РµС€СЊ РёР· С„Р°Р№Р»Р° РІСЃРµРіРґР° С‚Рѕ, С‡С‚Рѕ Р·Р°РїРёСЃР°Р».
+    // РќСѓР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃРїРµС†РёР°Р»СЊРЅС‹Р№ СЂРµР¶РёРј РѕС‚РєСЂС‹С‚РёСЏ РґР»СЏ Р±РёРЅР°СЂРЅС‹С… С„Р°Р№Р»РѕРІ. OpenModeWriteBinaryAppend РёР»Рё OpenModeWriteBinaryRewrite.
+    // first_object_symbol - Р­С‚Рѕ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїРµСЂРІС‹Р№ СЃРёРјРІРѕР» РёР»Рё РїРµСЂРІСѓСЋ РѕР±Р»Р°СЃС‚СЊ РїР°РјСЏС‚Рё РѕР±СЉРµРєС‚Р°.
+    // РќР°РїСЂРёРјРµСЂ, СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°. reinterpret_cast<ByteT*>(&object[0])
+    // object_size - РєРѕР»РёС‡РµСЃС‚РІРѕ Р±Р°Р№С‚, РєРѕС‚РѕСЂС‹Рµ Р·Р°РЅРёРјР°РµС‚ РѕР±СЉРµРєС‚
     template<IsByte ByteT = unsigned char, typename SymbolT>
     inline void WriteSerializedDataFile(std::basic_ofstream<ByteT>& write_file_stream,
                                      const SymbolT* const first_object_symbol, const std::streamsize object_size = sizeof(SymbolT),
@@ -45,20 +45,20 @@ namespace file {
                       "ByteT can be only: unsigned char or std::byte");
         write_file_stream.imbue(locale);
 
-        if (object_size > 0) { // wofstream не будет работать, если '\x0101' в старшем байте не будут 00 = '\x0001'
+        if (object_size > 0) { // wofstream РЅРµ Р±СѓРґРµС‚ СЂР°Р±РѕС‚Р°С‚СЊ, РµСЃР»Рё '\x0101' РІ СЃС‚Р°СЂС€РµРј Р±Р°Р№С‚Рµ РЅРµ Р±СѓРґСѓС‚ 00 = '\x0001'
             write_file_stream.write(reinterpret_cast<const ByteT*>(first_object_symbol), object_size);
             if (write_file_stream.bad()) { throw ErrorWriteFile(); }
 
-            // Запись информации непосредственно в файл
+            // Р—Р°РїРёСЃСЊ РёРЅС„РѕСЂРјР°С†РёРё РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РІ С„Р°Р№Р»
             FlushFile(write_file_stream);
         }
     }
 
-    // Бинарная запись объекта в файл: ты читаешь из файла всегда то, что записал.
-    // Нужно использовать специальный режим открытия для бинарных файлов. OpenModeWriteBinaryAppend или OpenModeWriteBinaryRewrite.
-    // first_object_symbol - Это указатель на первый символ или первую область памяти объекта.
-    // Например, указатель на первый элемент массива. reinterpret_cast<ByteT*>(&object[0])
-    // object_size - количество байт, которые занимает объект
+    // Р‘РёРЅР°СЂРЅР°СЏ Р·Р°РїРёСЃСЊ РѕР±СЉРµРєС‚Р° РІ С„Р°Р№Р»: С‚С‹ С‡РёС‚Р°РµС€СЊ РёР· С„Р°Р№Р»Р° РІСЃРµРіРґР° С‚Рѕ, С‡С‚Рѕ Р·Р°РїРёСЃР°Р».
+    // РќСѓР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃРїРµС†РёР°Р»СЊРЅС‹Р№ СЂРµР¶РёРј РѕС‚РєСЂС‹С‚РёСЏ РґР»СЏ Р±РёРЅР°СЂРЅС‹С… С„Р°Р№Р»РѕРІ. OpenModeWriteBinaryAppend РёР»Рё OpenModeWriteBinaryRewrite.
+    // first_object_symbol - Р­С‚Рѕ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїРµСЂРІС‹Р№ СЃРёРјРІРѕР» РёР»Рё РїРµСЂРІСѓСЋ РѕР±Р»Р°СЃС‚СЊ РїР°РјСЏС‚Рё РѕР±СЉРµРєС‚Р°.
+    // РќР°РїСЂРёРјРµСЂ, СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ РјР°СЃСЃРёРІР°. reinterpret_cast<ByteT*>(&object[0])
+    // object_size - РєРѕР»РёС‡РµСЃС‚РІРѕ Р±Р°Р№С‚, РєРѕС‚РѕСЂС‹Рµ Р·Р°РЅРёРјР°РµС‚ РѕР±СЉРµРєС‚
     template<IsByte ByteT = unsigned char, typename SymbolT>
     inline void WriteSerializedDataFile(const char* file_path, const SymbolT* const first_object_symbol,
                                      const std::streamsize object_size = sizeof(SymbolT),
@@ -84,11 +84,11 @@ namespace file {
     }
 
 
-    //-------------------------------------------Работа с векторами байт
+    //-------------------------------------------Р Р°Р±РѕС‚Р° СЃ РІРµРєС‚РѕСЂР°РјРё Р±Р°Р№С‚
 
-    // TODO: Убрать противные wchar_t. Добавить нормальный байт.
+    // TODO: РЈР±СЂР°С‚СЊ РїСЂРѕС‚РёРІРЅС‹Рµ wchar_t. Р”РѕР±Р°РІРёС‚СЊ РЅРѕСЂРјР°Р»СЊРЅС‹Р№ Р±Р°Р№С‚.
 
-    // Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
+    // Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїРѕСЃР»Рµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё РґР°РЅРЅС‹С… Рё РєРѕРїРёСЂРѕРІР°РЅРёСЏ Р±РёС‚ РёР· РёСЃС…РѕРґРЅРѕРіРѕ РѕР±СЉРµРєС‚Р° РІ РІРµРєС‚РѕСЂ char СЃ РїРѕРјРѕС‰СЊСЋ memcpy РёР»Рё bit_cast
     template<typename ByteT = unsigned char>
     inline void WriteSerializedDataFile(std::basic_ofstream<unsigned char>& write_file_stream, const std::vector<ByteT>& data,
                                          std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,
@@ -107,7 +107,7 @@ namespace file {
         }
     }
 
-    // Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
+    // Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїРѕСЃР»Рµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё РґР°РЅРЅС‹С… Рё РєРѕРїРёСЂРѕРІР°РЅРёСЏ Р±РёС‚ РёР· РёСЃС…РѕРґРЅРѕРіРѕ РѕР±СЉРµРєС‚Р° РІ РІРµРєС‚РѕСЂ char СЃ РїРѕРјРѕС‰СЊСЋ memcpy РёР»Рё bit_cast
     template<typename ByteT = unsigned char>
     inline void WriteSerializedDataFile(const char* file_path, const std::vector<ByteT>& data,
                                          std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,
@@ -115,7 +115,7 @@ namespace file {
         static_assert(std::is_same<ByteT, unsigned char>::value || std::is_same<ByteT, wchar_t>::value
             || std::is_same<ByteT, std::byte>::value, "ByteT can be only: char, wchar_t or std::byte");
         if (data.size() > 0) {
-            if (std::is_same<ByteT, std::byte>::value) { // Если не нужно конвертировать wchar_t
+            if (std::is_same<ByteT, std::byte>::value) { // Р•СЃР»Рё РЅРµ РЅСѓР¶РЅРѕ РєРѕРЅРІРµСЂС‚РёСЂРѕРІР°С‚СЊ wchar_t
                 WriteSerializedDataFile(file_path, &data[0], data.size() * sizeof(std::byte), open_mode, locale);
             }
             else {
@@ -124,7 +124,7 @@ namespace file {
         }
     }
 
-    // Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
+    // Р’С‹Р·С‹РІР°РµС‚СЃСЏ РїРѕСЃР»Рµ СЃРµСЂРёР°Р»РёР·Р°С†РёРё РґР°РЅРЅС‹С… Рё РєРѕРїРёСЂРѕРІР°РЅРёСЏ Р±РёС‚ РёР· РёСЃС…РѕРґРЅРѕРіРѕ РѕР±СЉРµРєС‚Р° РІ РІРµРєС‚РѕСЂ char СЃ РїРѕРјРѕС‰СЊСЋ memcpy РёР»Рё bit_cast
     template<typename ByteT = unsigned char>
     inline void WriteSerializedDataFile(const std::string& file_path, const std::vector<ByteT>& data,
                                          std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,
@@ -132,7 +132,7 @@ namespace file {
         static_assert(std::is_same<ByteT, unsigned char>::value || std::is_same<ByteT, wchar_t>::value
             || std::is_same<ByteT, std::byte>::value, "ByteT can be only: char, wchar_t or std::byte");
         if (data.size() > 0) {
-            if (std::is_same<ByteT, std::byte>::value) { // Если не нужно конвертировать wchar_t
+            if (std::is_same<ByteT, std::byte>::value) { // Р•СЃР»Рё РЅРµ РЅСѓР¶РЅРѕ РєРѕРЅРІРµСЂС‚РёСЂРѕРІР°С‚СЊ wchar_t
                 WriteSerializedDataFile(file_path.c_str(), &data[0], data.size() * sizeof(ByteT), open_mode, locale);
             }
             else {

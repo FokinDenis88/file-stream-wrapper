@@ -13,7 +13,7 @@
 
 namespace file {
 
-    // Запускает WriteDataFile в новом потоке. join - будет ли основной поток ждать файловый поток
+    // Р—Р°РїСѓСЃРєР°РµС‚ WriteDataFile РІ РЅРѕРІРѕРј РїРѕС‚РѕРєРµ. join - Р±СѓРґРµС‚ Р»Рё РѕСЃРЅРѕРІРЅРѕР№ РїРѕС‚РѕРє Р¶РґР°С‚СЊ С„Р°Р№Р»РѕРІС‹Р№ РїРѕС‚РѕРє
     template <typename ByteT = unsigned char, typename SymbolT>
     inline void WriteSerializedDataFileNewThread(const char* file_path, const SymbolT* first_object_symbol, const std::streamsize object_size,
                                                 std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,
@@ -27,7 +27,7 @@ namespace file {
         else { write_file_thread.detach(); }
     }
 
-    // Запускает WriteDataFile в новом потоке. join - будет ли основной поток ждать файловый поток
+    // Р—Р°РїСѓСЃРєР°РµС‚ WriteDataFile РІ РЅРѕРІРѕРј РїРѕС‚РѕРєРµ. join - Р±СѓРґРµС‚ Р»Рё РѕСЃРЅРѕРІРЅРѕР№ РїРѕС‚РѕРє Р¶РґР°С‚СЊ С„Р°Р№Р»РѕРІС‹Р№ РїРѕС‚РѕРє
     template <typename ByteT = unsigned char, typename SymbolT>
     inline void WriteSerializedDataFileNewThread(const std::string& file_path, const SymbolT* first_object_symbol, 
                                                 const std::streamsize object_size,
@@ -42,7 +42,7 @@ namespace file {
         else { write_file_thread.detach(); }
     }
 
-    // Запускает WriteDataFile в новом потоке. join - будет ли основной поток ждать файловый поток
+    // Р—Р°РїСѓСЃРєР°РµС‚ WriteDataFile РІ РЅРѕРІРѕРј РїРѕС‚РѕРєРµ. join - Р±СѓРґРµС‚ Р»Рё РѕСЃРЅРѕРІРЅРѕР№ РїРѕС‚РѕРє Р¶РґР°С‚СЊ С„Р°Р№Р»РѕРІС‹Р№ РїРѕС‚РѕРє
     template<typename ByteT = unsigned char>
     void WriteSerializedDataFileNewThread(const char* file_path, const std::vector<ByteT>& data,
                                         std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,
@@ -56,7 +56,7 @@ namespace file {
         else { write_file_thread.detach(); }
     }
 
-    // Запускает WriteDataFile в новом потоке. join - будет ли основной поток ждать файловый поток
+    // Р—Р°РїСѓСЃРєР°РµС‚ WriteDataFile РІ РЅРѕРІРѕРј РїРѕС‚РѕРєРµ. join - Р±СѓРґРµС‚ Р»Рё РѕСЃРЅРѕРІРЅРѕР№ РїРѕС‚РѕРє Р¶РґР°С‚СЊ С„Р°Р№Р»РѕРІС‹Р№ РїРѕС‚РѕРє
     template<typename ByteT = unsigned char>
     void WriteSerializedDataFileNewThread(const std::string& file_path, const std::vector<ByteT>& data,
                                             std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,

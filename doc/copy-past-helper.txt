@@ -1,0 +1,66 @@
+#ifndef _H
+#define _H
+
+namespace file {
+}
+
+#endif // !_H
+
+assert(CheckGLCommandsErrors());
+
+#define DEBUG
+// Отключение всех assert проверок. Включить при релизе программы
+#ifndef DEBUG
+#define NDEBUG
+#endif // !DEBUG
+
+//CODE
+//DATA
+
+OpenGLShaderProgram() = default;
+OpenGLShaderProgram(const OpenGLShaderProgram& obj);
+OpenGLShaderProgram& operator=(const OpenGLShaderProgram& right_operand);
+OpenGLShaderProgram(OpenGLShaderProgram&& obj) noexcept;
+OpenGLShaderProgram& operator=(OpenGLShaderProgram&& right_operand) noexcept;
+~OpenGLShaderProgram();
+
+//==============================================================================================
+
+Related header
+C system headers
+C++ standard library headers
+Other libraries' headers
+Project's headers.
+
+
+A class definition should usually start with a public: section, followed by protected:, then private:. Omit sections that would be empty.
+Within each section, prefer grouping similar kinds of declarations together, and prefer the following order:
+types (including typedef, using, enum, and nested structs and classes), 
+constants, factory functions, constructors and assignment operators, destructor, all other methods, data members.
+
+
+// Regular Expression for finding code lines count in solution or project
+^(?!(\s*\*))(?!(\s*\-\-\>))(?!(\s*\<\!\-\-))(?!(\s*\n))(?!(\s*\*\/))(?!(\s*\/\*))(?!(\s*\/\/\/))(?!(\s*\/\/))(?!(\s*\}))(?!(\s*\{))(?!(\s(using))).*$
+
+
+
+
+// EXCEPTION MACROS
+#if _HAS_EXCEPTIONS
+#define _TRY_BEGIN try {
+#define _CATCH(x) \
+    }             \
+    catch (x) {
+#define _CATCH_ALL \
+    }              \
+    catch (...) {
+#define _CATCH_END }
+
+#define _RERAISE  throw
+#define _THROW(x) throw x
+
+Output Directory
+$(ProjectDir)\bin\$(Platform)\$(Configuration)\
+
+Intermediate Directory
+$(ProjectDir)\bin\obj\$(Platform)\$(Configuration)\

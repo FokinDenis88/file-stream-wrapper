@@ -11,15 +11,15 @@
 
 namespace file {
 
-    // Реализация записи текстовой информации в файл через оператор <<
-    // Осторожно: Управляющие символы в разных операционных системах могут интерпретироваться по разному.
-    // Ты читаешь из файла не всегда то, что записал
-    // По умолчанию открывает в режиме Append для добавление в конец файла
-    // Если запись осуществляется с типом wchar_t, то и file_content Должен содержать литерал L"" или быть wchar_t
-    // Конец массива символов nullterminator Не записывается
-    // При вызове потока нужно Прописать все аргументы шаблона. Создать объект для каждого параметра функции
+    // Р РµР°Р»РёР·Р°С†РёСЏ Р·Р°РїРёСЃРё С‚РµРєСЃС‚РѕРІРѕР№ РёРЅС„РѕСЂРјР°С†РёРё РІ С„Р°Р№Р» С‡РµСЂРµР· РѕРїРµСЂР°С‚РѕСЂ <<
+    // РћСЃС‚РѕСЂРѕР¶РЅРѕ: РЈРїСЂР°РІР»СЏСЋС‰РёРµ СЃРёРјРІРѕР»С‹ РІ СЂР°Р·РЅС‹С… РѕРїРµСЂР°С†РёРѕРЅРЅС‹С… СЃРёСЃС‚РµРјР°С… РјРѕРіСѓС‚ РёРЅС‚РµСЂРїСЂРµС‚РёСЂРѕРІР°С‚СЊСЃСЏ РїРѕ СЂР°Р·РЅРѕРјСѓ.
+    // РўС‹ С‡РёС‚Р°РµС€СЊ РёР· С„Р°Р№Р»Р° РЅРµ РІСЃРµРіРґР° С‚Рѕ, С‡С‚Рѕ Р·Р°РїРёСЃР°Р»
+    // РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РѕС‚РєСЂС‹РІР°РµС‚ РІ СЂРµР¶РёРјРµ Append РґР»СЏ РґРѕР±Р°РІР»РµРЅРёРµ РІ РєРѕРЅРµС† С„Р°Р№Р»Р°
+    // Р•СЃР»Рё Р·Р°РїРёСЃСЊ РѕСЃСѓС‰РµСЃС‚РІР»СЏРµС‚СЃСЏ СЃ С‚РёРїРѕРј wchar_t, С‚Рѕ Рё file_content Р”РѕР»Р¶РµРЅ СЃРѕРґРµСЂР¶Р°С‚СЊ Р»РёС‚РµСЂР°Р» L"" РёР»Рё Р±С‹С‚СЊ wchar_t
+    // РљРѕРЅРµС† РјР°СЃСЃРёРІР° СЃРёРјРІРѕР»РѕРІ nullterminator РќРµ Р·Р°РїРёСЃС‹РІР°РµС‚СЃСЏ
+    // РџСЂРё РІС‹Р·РѕРІРµ РїРѕС‚РѕРєР° РЅСѓР¶РЅРѕ РџСЂРѕРїРёСЃР°С‚СЊ РІСЃРµ Р°СЂРіСѓРјРµРЅС‚С‹ С€Р°Р±Р»РѕРЅР°. РЎРѕР·РґР°С‚СЊ РѕР±СЉРµРєС‚ РґР»СЏ РєР°Р¶РґРѕРіРѕ РїР°СЂР°РјРµС‚СЂР° С„СѓРЅРєС†РёРё
     // std::thread(WriteDataFile<wchar_t, std::wstring>, std::string("file_path"), std::wstring(L"file_data"), OpenModeWriteRewrite, std::locale())
-    // По возможности в поток в параметры проводить std::ref обертки на ссылки на аргументы
+    // РџРѕ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РІ РїРѕС‚РѕРє РІ РїР°СЂР°РјРµС‚СЂС‹ РїСЂРѕРІРѕРґРёС‚СЊ std::ref РѕР±РµСЂС‚РєРё РЅР° СЃСЃС‹Р»РєРё РЅР° Р°СЂРіСѓРјРµРЅС‚С‹
     template<typename CharT = char, typename ContentT>
     void WriteDataFile(const char* file_path, const ContentT& file_content, std::ios_base::openmode open_mode = OpenModeWriteAppend,
                        const std::locale& locale = std::locale()) {
@@ -27,16 +27,16 @@ namespace file {
         std::basic_ofstream<CharT> write_file_stream = OpenFile<std::basic_ofstream<CharT>>(file_path, open_mode);
         write_file_stream.imbue(locale);
 
-        // не пропускать white space - пробел std::noskipws
+        // РЅРµ РїСЂРѕРїСѓСЃРєР°С‚СЊ white space - РїСЂРѕР±РµР» std::noskipws
         write_file_stream << file_content;
         if (write_file_stream.fail()) { throw ErrorWriteFile(); }
 
-        // Запись информации непосредственно в файл
+        // Р—Р°РїРёСЃСЊ РёРЅС„РѕСЂРјР°С†РёРё РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РІ С„Р°Р№Р»
         FlushFile(write_file_stream);
         CloseFile(write_file_stream);
     }
 
-    // Используется, если путь к файлу - это объект типа std::string
+    // РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ - СЌС‚Рѕ РѕР±СЉРµРєС‚ С‚РёРїР° std::string
     template<typename CharT = char, typename ContentT>
     void WriteDataFile(const std::string& file_path, const ContentT& file_content, std::ios_base::openmode open_mode = OpenModeWriteAppend,
                        const std::locale& locale = std::locale()) {

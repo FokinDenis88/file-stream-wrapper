@@ -12,7 +12,7 @@
 
 namespace file {
 
-    // Бинарное чтение объекта из файла: ты читаешь из файла всегда то, что записал.
+    // Р‘РёРЅР°СЂРЅРѕРµ С‡С‚РµРЅРёРµ РѕР±СЉРµРєС‚Р° РёР· С„Р°Р№Р»Р°: С‚С‹ С‡РёС‚Р°РµС€СЊ РёР· С„Р°Р№Р»Р° РІСЃРµРіРґР° С‚Рѕ, С‡С‚Рѕ Р·Р°РїРёСЃР°Р».
     template <typename ByteT = unsigned char>
     std::vector<ByteT> ReadSerializedDataFile(std::basic_ifstream<ByteT>& read_file_stream,
                                               std::ios_base::openmode open_mode = OpenModeReadBinary,
@@ -24,7 +24,7 @@ namespace file {
         auto size = SizeOfFile<ByteT>(read_file_stream);
         std::vector<ByteT> file_content(size);
         if (size > 0) {
-            if (read_file_stream.tellg() != 0) { // Переставляем позицию в файле на начало
+            if (read_file_stream.tellg() != 0) { // РџРµСЂРµСЃС‚Р°РІР»СЏРµРј РїРѕР·РёС†РёСЋ РІ С„Р°Р№Р»Рµ РЅР° РЅР°С‡Р°Р»Рѕ
                 read_file_stream.seekg(0, std::ios_base::beg);    if (!(read_file_stream.good())) { throw ErrorFileOperation(); }
             }
 
@@ -35,7 +35,7 @@ namespace file {
         return file_content;
     }
 
-    // Бинарное чтение объекта из файла: ты читаешь из файла всегда то, что записал.
+    // Р‘РёРЅР°СЂРЅРѕРµ С‡С‚РµРЅРёРµ РѕР±СЉРµРєС‚Р° РёР· С„Р°Р№Р»Р°: С‚С‹ С‡РёС‚Р°РµС€СЊ РёР· С„Р°Р№Р»Р° РІСЃРµРіРґР° С‚Рѕ, С‡С‚Рѕ Р·Р°РїРёСЃР°Р».
     template <typename ByteT = unsigned char>
     std::vector<ByteT> ReadSerializedDataFile(const char* file_path, std::ios_base::openmode open_mode = OpenModeReadBinary,
                                               const std::locale& locale = std::locale()) {
@@ -47,7 +47,7 @@ namespace file {
         return file_content;
     }
 
-    // Бинарное чтение объекта из файла: ты читаешь из файла всегда то, что записал.
+    // Р‘РёРЅР°СЂРЅРѕРµ С‡С‚РµРЅРёРµ РѕР±СЉРµРєС‚Р° РёР· С„Р°Р№Р»Р°: С‚С‹ С‡РёС‚Р°РµС€СЊ РёР· С„Р°Р№Р»Р° РІСЃРµРіРґР° С‚Рѕ, С‡С‚Рѕ Р·Р°РїРёСЃР°Р».
     template <typename ByteT = unsigned char>
     std::vector<ByteT> ReadSerializedDataFile(const std::string& file_path, std::ios_base::openmode open_mode = OpenModeReadBinary,
                                               const std::locale& locale = std::locale()) {

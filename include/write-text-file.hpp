@@ -11,11 +11,11 @@
 
 namespace file {
 
-    // Реализация записи текстовой информации в файл через оператор <<
-        // Осторожно: Управляющие символы в разных операционных системах могут интерпретироваться по разному.
-        // По умолчанию открывает в режиме Append для добавление в конец файла
-        // Если запись осуществляется с типом wchar_t, то и file_content Должен содержать литерал L"" или быть wchar_t
-        // Конец массива символов nullterminator Не записывается
+    // Р РµР°Р»РёР·Р°С†РёСЏ Р·Р°РїРёСЃРё С‚РµРєСЃС‚РѕРІРѕР№ РёРЅС„РѕСЂРјР°С†РёРё РІ С„Р°Р№Р» С‡РµСЂРµР· РѕРїРµСЂР°С‚РѕСЂ <<
+        // РћСЃС‚РѕСЂРѕР¶РЅРѕ: РЈРїСЂР°РІР»СЏСЋС‰РёРµ СЃРёРјРІРѕР»С‹ РІ СЂР°Р·РЅС‹С… РѕРїРµСЂР°С†РёРѕРЅРЅС‹С… СЃРёСЃС‚РµРјР°С… РјРѕРіСѓС‚ РёРЅС‚РµСЂРїСЂРµС‚РёСЂРѕРІР°С‚СЊСЃСЏ РїРѕ СЂР°Р·РЅРѕРјСѓ.
+        // РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РѕС‚РєСЂС‹РІР°РµС‚ РІ СЂРµР¶РёРјРµ Append РґР»СЏ РґРѕР±Р°РІР»РµРЅРёРµ РІ РєРѕРЅРµС† С„Р°Р№Р»Р°
+        // Р•СЃР»Рё Р·Р°РїРёСЃСЊ РѕСЃСѓС‰РµСЃС‚РІР»СЏРµС‚СЃСЏ СЃ С‚РёРїРѕРј wchar_t, С‚Рѕ Рё file_content Р”РѕР»Р¶РµРЅ СЃРѕРґРµСЂР¶Р°С‚СЊ Р»РёС‚РµСЂР°Р» L"" РёР»Рё Р±С‹С‚СЊ wchar_t
+        // РљРѕРЅРµС† РјР°СЃСЃРёРІР° СЃРёРјРІРѕР»РѕРІ nullterminator РќРµ Р·Р°РїРёСЃС‹РІР°РµС‚СЃСЏ
     template<typename CharT = char>
     void WriteTextFile(const char* file_path, const std::basic_string<CharT>& file_content,
                         std::ios_base::openmode open_mode = OpenModeWriteAppend,
@@ -25,16 +25,16 @@ namespace file {
         write_file_stream.imbue(locale);
 
         if (file_content.size() > 0) {
-            write_file_stream << file_content; // не пропускать white space - пробел std::noskipws
+            write_file_stream << file_content; // РЅРµ РїСЂРѕРїСѓСЃРєР°С‚СЊ white space - РїСЂРѕР±РµР» std::noskipws
             if (write_file_stream.fail()) { throw ErrorWriteFile(); }
         }
 
-        // Запись информации непосредственно в файл
+        // Р—Р°РїРёСЃСЊ РёРЅС„РѕСЂРјР°С†РёРё РЅРµРїРѕСЃСЂРµРґСЃС‚РІРµРЅРЅРѕ РІ С„Р°Р№Р»
         FlushFile(write_file_stream);
         CloseFile(write_file_stream);
     }
 
-    // Используется, если путь к файлу - это объект типа std::string
+    // РСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ, РµСЃР»Рё РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ - СЌС‚Рѕ РѕР±СЉРµРєС‚ С‚РёРїР° std::string
     template<typename CharT = char>
     void WriteTextFile(const std::string& file_path, const std::basic_string<CharT>& file_content,
                         std::ios_base::openmode open_mode = OpenModeWriteAppend,
