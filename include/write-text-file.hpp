@@ -11,11 +11,11 @@
 
 namespace file {
 
-    // Реализация записи текстовой информации в файл через оператор <<
-        // Осторожно: Управляющие символы в разных операционных системах могут интерпретироваться по разному.
-        // По умолчанию открывает в режиме Append для добавление в конец файла
-        // Если запись осуществляется с типом wchar_t, то и file_content Должен содержать литерал L"" или быть wchar_t
-        // Конец массива символов nullterminator Не записывается
+    /** Реализация записи текстовой информации в файл через оператор <<
+    * Осторожно: Управляющие символы в разных операционных системах могут интерпретироваться по разному.
+    * По умолчанию открывает в режиме Append для добавление в конец файла
+    * Если запись осуществляется с типом wchar_t, то и file_content Должен содержать литерал L"" или быть wchar_t
+    Конец массива символов nullterminator Не записывается */
     template<typename CharT = char>
     void WriteTextFile(const char* file_path, const std::basic_string<CharT>& file_content,
                         std::ios_base::openmode open_mode = OpenModeWriteAppend,
@@ -34,7 +34,7 @@ namespace file {
         CloseFile(write_file_stream);
     }
 
-    // Используется, если путь к файлу - это объект типа std::string
+    /// Используется, если путь к файлу - это объект типа std::string
     template<typename CharT = char>
     void WriteTextFile(const std::string& file_path, const std::basic_string<CharT>& file_content,
                         std::ios_base::openmode open_mode = OpenModeWriteAppend,

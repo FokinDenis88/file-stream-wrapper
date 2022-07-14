@@ -12,7 +12,7 @@
 
 namespace file {
 
-    // Бинарное чтение объекта из файла: ты читаешь из файла всегда то, что записал.
+    /// Бинарное чтение объекта из файла: ты читаешь из файла всегда то, что записал.
     template <typename ByteT = unsigned char>
     std::vector<ByteT> ReadSerializedDataFile(std::basic_ifstream<ByteT>& read_file_stream,
                                               std::ios_base::openmode open_mode = OpenModeReadBinary,
@@ -35,7 +35,7 @@ namespace file {
         return file_content;
     }
 
-    // Бинарное чтение объекта из файла: ты читаешь из файла всегда то, что записал.
+    /// Бинарное чтение объекта из файла: ты читаешь из файла всегда то, что записал.
     template <typename ByteT = unsigned char>
     std::vector<ByteT> ReadSerializedDataFile(const char* file_path, std::ios_base::openmode open_mode = OpenModeReadBinary,
                                               const std::locale& locale = std::locale()) {
@@ -47,7 +47,7 @@ namespace file {
         return file_content;
     }
 
-    // Бинарное чтение объекта из файла: ты читаешь из файла всегда то, что записал.
+    /// Бинарное чтение объекта из файла: ты читаешь из файла всегда то, что записал.
     template <typename ByteT = unsigned char>
     std::vector<ByteT> ReadSerializedDataFile(const std::string& file_path, std::ios_base::openmode open_mode = OpenModeReadBinary,
                                               const std::locale& locale = std::locale()) {

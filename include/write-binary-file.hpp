@@ -12,11 +12,11 @@
 
 namespace file {
 
-    // Бинарная запись объекта в файл: ты читаешь из файла всегда то, что записал.
-    // Нужно использовать специальный режим открытия для бинарных файлов. OpenModeWriteBinaryAppend или OpenModeWriteBinaryRewrite.
-    // first_object_symbol - Это указатель на первый символ или первую область памяти объекта.
-    // Например, указатель на первый элемент массива. reinterpret_cast<ByteT*>(&object[0])
-    // object_size - количество байт, которые занимает объект
+    /** Бинарная запись объекта в файл : ты читаешь из файла всегда то, что записал.
+    * Нужно использовать специальный режим открытия для бинарных файлов. OpenModeWriteBinaryAppend или OpenModeWriteBinaryRewrite.
+    * first_object_symbol - Это указатель на первый символ или первую область памяти объекта.
+    * Например, указатель на первый элемент массива. reinterpret_cast<ByteT*>(&object[0])
+    * object_size - количество байт, которые занимает объект*/
     template<typename ByteT = char>
     void WriteBinaryFile(std::basic_ofstream<ByteT>& write_file_stream,
                         const void* first_object_symbol, const std::streamsize object_size,
@@ -33,11 +33,11 @@ namespace file {
         }
     }
 
-    // Бинарная запись объекта в файл: ты читаешь из файла всегда то, что записал.
-    // Нужно использовать специальный режим открытия для бинарных файлов. OpenModeWriteBinaryAppend или OpenModeWriteBinaryRewrite.
-    // first_object_symbol - Это указатель на первый символ или первую область памяти объекта.
-    // Например, указатель на первый элемент массива. reinterpret_cast<ByteT*>(&object[0])
-    // object_size - количество байт, которые занимает объект
+    /** Бинарная запись объекта в файл : ты читаешь из файла всегда то, что записал.
+    * Нужно использовать специальный режим открытия для бинарных файлов. OpenModeWriteBinaryAppend или OpenModeWriteBinaryRewrite.
+    * first_object_symbol - Это указатель на первый символ или первую область памяти объекта.
+    * Например, указатель на первый элемент массива. reinterpret_cast<ByteT*>(&object[0])
+    * object_size - количество байт, которые занимает объект*/
     template<typename ByteT = char>
     void WriteBinaryFile(const char* file_path, const void* first_object_symbol, const std::streamsize object_size,
                         std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,
@@ -58,7 +58,7 @@ namespace file {
 
 
 
-    // Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
+    /// Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
     template<typename ByteT = char>
     void WriteBinaryFile(std::basic_ofstream<ByteT>& write_file_stream, const std::vector<ByteT>& data,
                         std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,
@@ -67,8 +67,8 @@ namespace file {
             WriteBinaryFile<ByteT>(write_file_stream, &data[0], data.size() * sizeof(ByteT), open_mode, locale);
         }
     }
-    
-    // Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
+
+    /// Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
     template<typename ByteT = char>
     void WriteBinaryFile(const char* file_path, const std::vector<ByteT>& data,
                         std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,
@@ -78,7 +78,7 @@ namespace file {
         }
     }
 
-    // Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
+    /// Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
     template<typename ByteT = char>
     void WriteBinaryFile(const std::string& file_path, const std::vector<ByteT>& data,
                         std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,

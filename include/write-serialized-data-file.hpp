@@ -11,15 +11,15 @@
 #include "file-service.hpp"
 #include "errors-handler-file-operations.hpp"
 
-// write, read files, another service operations based on fstream
+/// write, read files, another service operations based on fstream
 namespace file {
-    
-    // Size of array, vector for writing arrays in files
+
+    /// Size of array, vector for writing arrays in files
     template<typename ElemT>
     inline size_t SizeOfArray(const std::vector<ElemT>& array_p) {
         return sizeof(array_p[0]) * array_p.size();
     }
-    // Size of array, vector for writing arrays in files
+    /// Size of array, vector for writing arrays in files
     template<typename ElemT>
     inline size_t SizeOfArray(const std::vector<ElemT>& array_p, const size_t array_elem_count) {
         return sizeof(array_p[0]) * array_elem_count;
@@ -31,17 +31,17 @@ namespace file {
     template<typename ByteT>
     concept IsByte = std::is_same_v<ByteT, unsigned char> || std::is_same_v<ByteT, std::byte>;
 
-    // Бинарная запись объекта в файл: ты читаешь из файла всегда то, что записал.
-    // Нужно использовать специальный режим открытия для бинарных файлов. OpenModeWriteBinaryAppend или OpenModeWriteBinaryRewrite.
-    // first_object_symbol - Это указатель на первый символ или первую область памяти объекта.
-    // Например, указатель на первый элемент массива. reinterpret_cast<ByteT*>(&object[0])
-    // object_size - количество байт, которые занимает объект
+    /**  Бинарная запись объекта в файл : ты читаешь из файла всегда то, что записал.
+    * Нужно использовать специальный режим открытия для бинарных файлов. OpenModeWriteBinaryAppend или OpenModeWriteBinaryRewrite.
+    * first_object_symbol - Это указатель на первый символ или первую область памяти объекта.
+    * Например, указатель на первый элемент массива. reinterpret_cast<ByteT*>(&object[0])
+    * object_size - количество байт, которые занимает объект*/
     template<IsByte ByteT = unsigned char, typename SymbolT>
     inline void WriteSerializedDataFile(std::basic_ofstream<ByteT>& write_file_stream,
                                      const SymbolT* const first_object_symbol, const std::streamsize object_size = sizeof(SymbolT),
                                      std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,
                                      const std::locale& locale = std::locale()) { // open_mode & locale is defined as default in forward declaration
-        static_assert(std::is_same_v<ByteT, unsigned char> || std::is_same_v<ByteT, std::byte>, 
+        static_assert(std::is_same_v<ByteT, unsigned char> || std::is_same_v<ByteT, std::byte>,
                       "ByteT can be only: unsigned char or std::byte");
         write_file_stream.imbue(locale);
 
@@ -54,11 +54,11 @@ namespace file {
         }
     }
 
-    // Бинарная запись объекта в файл: ты читаешь из файла всегда то, что записал.
-    // Нужно использовать специальный режим открытия для бинарных файлов. OpenModeWriteBinaryAppend или OpenModeWriteBinaryRewrite.
-    // first_object_symbol - Это указатель на первый символ или первую область памяти объекта.
-    // Например, указатель на первый элемент массива. reinterpret_cast<ByteT*>(&object[0])
-    // object_size - количество байт, которые занимает объект
+    /** Бинарная запись объекта в файл : ты читаешь из файла всегда то, что записал.
+    * Нужно использовать специальный режим открытия для бинарных файлов. OpenModeWriteBinaryAppend или OpenModeWriteBinaryRewrite.
+    * first_object_symbol - Это указатель на первый символ или первую область памяти объекта.
+    * Например, указатель на первый элемент массива. reinterpret_cast<ByteT*>(&object[0])
+    * object_size - количество байт, которые занимает объект*/
     template<IsByte ByteT = unsigned char, typename SymbolT>
     inline void WriteSerializedDataFile(const char* file_path, const SymbolT* const first_object_symbol,
                                      const std::streamsize object_size = sizeof(SymbolT),
@@ -88,7 +88,7 @@ namespace file {
 
     // TODO: Убрать противные wchar_t. Добавить нормальный байт.
 
-    // Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
+    /// Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
     template<typename ByteT = unsigned char>
     inline void WriteSerializedDataFile(std::basic_ofstream<unsigned char>& write_file_stream, const std::vector<ByteT>& data,
                                          std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,
@@ -107,7 +107,7 @@ namespace file {
         }
     }
 
-    // Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
+    /// Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
     template<typename ByteT = unsigned char>
     inline void WriteSerializedDataFile(const char* file_path, const std::vector<ByteT>& data,
                                          std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,
@@ -124,7 +124,7 @@ namespace file {
         }
     }
 
-    // Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
+    /// Вызывается после сериализации данных и копирования бит из исходного объекта в вектор char с помощью memcpy или bit_cast
     template<typename ByteT = unsigned char>
     inline void WriteSerializedDataFile(const std::string& file_path, const std::vector<ByteT>& data,
                                          std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,

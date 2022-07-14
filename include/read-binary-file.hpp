@@ -12,7 +12,7 @@
 
 namespace file {
 
-    // Бинарное чтение файла: ты читаешь из файла всегда то, что записал.
+    /// Бинарное чтение файла: ты читаешь из файла всегда то, что записал.
     template <typename ByteT = char>
     std::vector<ByteT> ReadBinaryFile(std::basic_ifstream<ByteT>& read_file_stream, const std::locale& locale = std::locale()) {
         read_file_stream.imbue(locale);
@@ -31,7 +31,7 @@ namespace file {
         return file_content;
     }
 
-    // Бинарное чтение файла: ты читаешь из файла всегда то, что записал.
+    /// Бинарное чтение файла: ты читаешь из файла всегда то, что записал.
     template <typename ByteT = char>
     std::vector<ByteT> ReadBinaryFile(const char* file_path, const std::locale& locale = std::locale()) {
         std::basic_ifstream<ByteT> read_file_stream = OpenFile<std::basic_ifstream<ByteT>>(file_path, OpenModeReadBinary);
@@ -40,7 +40,7 @@ namespace file {
         return file_content;
     }
 
-    // Бинарное чтение файла: ты читаешь из файла всегда то, что записал.
+    /// Бинарное чтение файла: ты читаешь из файла всегда то, что записал.
     template <typename ByteT = char>
     std::vector<ByteT> ReadBinaryFile(const std::string& file_path, const std::locale& locale = std::locale()) {
         return ReadBinaryFile<ByteT>(file_path.c_str(), locale);
