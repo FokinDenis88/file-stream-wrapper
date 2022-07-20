@@ -1,5 +1,5 @@
-#ifndef WRITESERIALIZEDDATAFILE_H
-#define WRITESERIALIZEDDATAFILE_H
+#ifndef WRITESERIALIZEDDATAFILE_HPP_
+#define WRITESERIALIZEDDATAFILE_HPP_
 
 #include <fstream>
 #include <locale>
@@ -143,4 +143,4 @@ namespace file {
 
 }
 
-#endif // !WRITESERIALIZEDDATAFILE_H
+#endif // !WRITESERIALIZEDDATAFILE_HPP_

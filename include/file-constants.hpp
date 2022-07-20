@@ -5,7 +5,6 @@
 
 // write, read files, another service operations based on fstream
 namespace file {
-
     // Запись в конец файла - режим открытия файла
     constexpr std::ios_base::openmode OpenModeWriteAppend = std::ios_base::out | std::ios_base::app;
 
