@@ -5,10 +5,21 @@
 #include <vector>
 #include <type_traits>
 
+#define CORRECT_NAME_FOR_WINDOWS
+#ifdef CORRECT_NAME_FOR_WINDOWS
+#include <regex>
+#include <string>
+
+#include "file-types.hpp"
+#endif // CORRECT_NAME_FOR_WINDOWS
+
 #include "file-constants.hpp"
+#include "file-types.hpp"
 #include "errors-handler-file-operations.hpp"
 
 namespace file {
+    //#define CORRECT_NAME_FOR_WINDOWS
+
     // Forward Declaration Section
 
     template<typename ByteT>
@@ -17,7 +28,7 @@ namespace file {
                                         const std::locale& locale);
 
 
-    // ��������� ��������� ���� ��������������� � �������� �������. ��������: ���������� ����� ��������
+    ///  Opens file stream
     template<typename FileStreamT = std::ifstream>
     inline void OpenFile(FileStreamT& file_stream, const std::string& file_path, std::ios_base::openmode open_mode = OpenModeReadFromBegin) {
         file_stream.open(file_path, open_mode);
@@ -25,7 +36,7 @@ namespace file {
         if (file_stream.fail() || !(file_stream.is_open())) { throw ErrorOpenFile(); }
     }
 
-    // ��������� ��������� ���� ��������������� � �������� �������
+    /// Opens file stream
     template<typename FileStreamT = std::ifstream>
     inline FileStreamT OpenFile(const std::string& file_path, std::ios_base::openmode open_mode = OpenModeReadFromBegin) {
         FileStreamT file_stream{};
@@ -33,7 +44,7 @@ namespace file {
         return file_stream;
     }
 
-    // ��������� ��������� ���� ��������������� � �������� �������
+    ///
     template<typename FileStreamT = std::ifstream>
     inline void CloseFile(FileStreamT& file_stream) {
         if (file_stream.is_open()) {
@@ -42,7 +53,7 @@ namespace file {
         }
     }
 
-    // ���������� �� ���� �� ���� path
+    ///  Checks if file exists
     inline bool FileExists(const std::string& path) {
         std::ifstream read_file(path);
         if (read_file) {
@@ -52,7 +63,7 @@ namespace file {
         else { return false; }
     }
 
-    // ������������ ������� ������ � �����. No checks for file_stream is_open.
+    /// No checks for file_stream is_open.
     template<typename FileStreamT = std::ifstream>
     inline void SeekgFilePos(FileStreamT& file_stream, long pos) {
         if (file_stream.tellg() != pos) { // ������������ ������� � ����� �� ����������� �������� ������� � �����
@@ -60,7 +71,7 @@ namespace file {
         }
     }
 
-    // ������������ ������� ������ � �����. No checks for file_stream is_open.
+    /// No checks for file_stream is_open.
     template<typename FileStreamT = std::ifstream>
     inline void SeekgFilePos(FileStreamT& file_stream, long off = 0, std::ios_base::seekdir dir = std::ios_base::beg) {
         if (file_stream.tellg() != dir + off) { // ������������ ������� � ����� �� ������� dir � ������ ������ off
@@ -74,7 +85,7 @@ namespace file {
         }
     }
 
-    // ������������ ������� ������ � �����. No checks for file_stream is_open.
+    /// No checks for file_stream is_open.
     template<typename FileStreamT = std::ifstream>
     inline void SeekpFilePos(FileStreamT& file_stream, long pos) {
         if (file_stream.tellp() != pos) { // ������������ ������� � ����� �� ����������� �������� ������� � �����
@@ -82,14 +93,14 @@ namespace file {
         }
     }
 
-    // ������������ ������� ������ � �����. No checks for file_stream is_open.
+    /// No checks for file_stream is_open.
     template<typename FileStreamT = std::ifstream>
     inline void SeekpFilePos(FileStreamT& file_stream, long off = 0, std::ios_base::seekdir dir = std::ios_base::beg) {
         if (file_stream.tellp() != dir + off) { // ������������ ������� � ����� �� ������� dir � ������ ������ off
             file_stream.seekp(off, dir);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
         }
     }
-    // ������������ ������� ������ � �����. No checks for file_stream is_open.
+    /// No checks for file_stream is_open.
     template<typename FileStreamT = std::ifstream>
     inline void SeekpFilePosEnd(FileStreamT& file_stream, long off = 0, std::ios_base::seekdir dir = std::ios_base::end) {
         if (file_stream.tellp() != dir + off) { // ������������ ������� � ����� �� ������� dir � ������ ������ off
@@ -97,16 +108,16 @@ namespace file {
         }
     }
 
-    // Tells get position in file
+    /// Tells get position in file
     template<typename CharT = char, typename FileStreamT = std::ifstream>
-    inline std::fpos<typename std::char_traits<CharT>::state_type> 
+    inline std::fpos<typename std::char_traits<CharT>::state_type>
     Tellg(FileStreamT& file_stream) {
         std::fpos<typename std::char_traits<CharT>::state_type> pos{ file_stream.tellg() };
         if (!file_stream) { throw ErrorFileOperation(); }
         return pos;
     }
 
-    // Tells put position in file
+    /// Tells put position in file
     template<typename CharT = char, typename FileStreamT = std::ofstream>
     inline std::fpos<typename std::char_traits<CharT>::state_type>
     Tellp(FileStreamT& file_stream) {
@@ -115,7 +126,7 @@ namespace file {
         return pos;
     }
 
-    // ������ ���������� ��������������� � ����. ������� �� ������ � ����
+    ///
     template<typename FileStreamT>
     inline void FlushFile(FileStreamT& file_stream) { // default value in forward declaring section
         file_stream.flush();
@@ -123,9 +134,7 @@ namespace file {
     }
 
 
-    // ���������� ������� �����.
-    // return ������� ����� �������� �������������� � int ��� long.
-    // ��������! �� ��������� ��������� ������� � ����� - � ����� ������
+    ///
     template<typename CharT = char, typename FileStreamT = std::ifstream>
     std::fpos<typename std::char_traits<CharT>::state_type>
     inline SizeOfFile(FileStreamT& file_stream, bool save_file_position = true) {
@@ -153,8 +162,7 @@ namespace file {
         return end - begin;
     }
 
-    // ���������� ������� �����.
-    // return ������� ����� �������� �������������� � int ��� long.
+    ///
     template<typename CharT = char>
     std::fpos<typename std::char_traits<CharT>::state_type>
     inline SizeOfFile(const std::string& file_path) {
@@ -170,7 +178,7 @@ namespace file {
     }
 
 
-    // ����������� ����� �� ���� original � ���� copy
+    ///
     inline void CopyFile(const std::string& original, const std::string& copy) {
         std::basic_fstream<unsigned char> read_write_file_stream
             = OpenFile<std::basic_fstream<unsigned char>>(original, OpenModeReadBinary);
@@ -195,7 +203,7 @@ namespace file {
         }
     }
 
-    // ������� ����� �� ����������� � �������� �����
+    ///
     template<typename CharT = char>
     inline void ClearFileContent(const std::string& file_path) {
         static_assert(std::is_same<CharT, char>::value || std::is_same<CharT, wchar_t>::value, "CharT can be only: char or wchar_t");
@@ -203,7 +211,7 @@ namespace file {
         CloseFile(write_file_stream);
     }
 
-    // Read one line from file from current position
+    /// Read one line from file from current position
     template<typename CharT = char, typename FileStreamT = std::basic_ifstream<CharT>>
     inline std::string ReadLineInFile(FileStreamT& file_stream) {
         std::basic_string<CharT> str{};
@@ -220,14 +228,93 @@ namespace file {
         return str_data;
     }
 
-    //template<typename CharT = char>
-    //inline std::basic_string<CharT> MakeStringFrmVectorByte(const std::vector<CharT>&& readed_data) {
-    //    return MakeStringFrmVectorByte<CharT>(readed_data);
-    //    /*std::basic_string<CharT> str_data{};
-    //    str_data.append(readed_data.begin(), readed_data.end());
-    //    return str_data;*/
-    //}
+#ifdef CORRECT_NAME_FOR_WINDOWS
+    ///     \/:*?"<>|
+    const std::string kWindowsRestrictedCharInFileName{ "\\/:*?\"<>|" };
+    const std::wstring kWindowsRestrictedCharInFileNameW{ L"\\/:*?\"<>|" };
 
-}
+    const std::string kRestrictedCharsPattern{ "[" + kWindowsRestrictedCharInFileName + "\n\r]" };
+    const std::wstring kRestrictedCharsPatternW{ L"[" + kWindowsRestrictedCharInFileNameW + L"\n\r]" };
+
+    const std::string kSpaceInEndPattern{ "\\s+\\z" };
+    const std::wstring kSpaceInEndPatternW{ L"\\s+\\z" };
+
+    /// Checks if path has restricted chars
+    /// Returns if there is restricted chars
+    template<CharsType CharT = wchar_t>
+    inline bool HasRestrictedCharsForOS(const std::basic_string<CharT>& file_name);
+
+    template<>
+    inline bool HasRestrictedCharsForOS<char>(const std::string& file_name) {
+        if (file_name.empty()) {
+            std::regex pattern{ kRestrictedCharsPattern };
+            if (std::regex_search(file_name.begin(), file_name.end(), pattern)) {
+                return true;
+            }
+
+            pattern = kSpaceInEndPattern;
+            if (std::regex_search(file_name.begin(), file_name.end(), pattern)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    template<>
+    inline bool HasRestrictedCharsForOS<wchar_t>(const std::wstring& file_name) {
+        if (file_name.empty()) {
+            std::wregex pattern{ kRestrictedCharsPatternW };
+            if (std::regex_search(file_name.begin(), file_name.end(), pattern)) {
+                return true;
+            }
+
+            pattern = kSpaceInEndPatternW;
+            if (std::regex_search(file_name.begin(), file_name.end(), pattern)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /// Replaces restricted characters
+    /// Restricted characters in Windows   \/:*?"<>|
+    template<CharsType CharT = wchar_t>
+    inline std::basic_string<CharT>
+        CorrectFileNameForOS(const std::basic_string<CharT>& name, const std::basic_string<CharT>& replacement,
+                             const std::basic_string<CharT>& strange_characters);
+
+    /// Replaces restricted characters
+    /// Restricted characters in Windows   \/:*?"<>|
+    template<>
+    inline std::basic_string<char>
+        CorrectFileNameForOS<char>(const std::string& name, const std::string& replacement,
+                                   const std::string& strange_characters) {
+        std::string correct_name{};
+        const std::regex pattern{ "[" + kWindowsRestrictedCharInFileName + strange_characters + "\n\r]" };
+        correct_name = std::regex_replace(name, pattern, replacement);
+        correct_name = std::regex_replace(correct_name, std::regex{ kSpaceInEndPattern }, "");    // Delete white spaces in the back of file name
+        return correct_name;
+    }
+
+    template<>
+    inline std::basic_string<wchar_t>
+        CorrectFileNameForOS<wchar_t>(const std::wstring& name, const std::wstring& replacement,
+                                      const std::wstring& strange_characters) {
+        std::wstring correct_name{};
+        const std::wregex pattern{ L"[" + kWindowsRestrictedCharInFileNameW + strange_characters + L"\n\r]" };
+        correct_name = std::regex_replace(name, pattern, replacement);
+        correct_name = std::regex_replace(correct_name, std::wregex{ kSpaceInEndPatternW }, L"");    // Delete white spaces in the back of file name
+        return correct_name;
+    }
+
+    // https://www.mtu.edu/umc/services/websites/writing/characters-avoid/
+    // const std::string kCharsToAvoidInOSPaths{ "\\/:*?\"<>|" };
+
+#endif // CORRECT_NAME_FOR_WINDOWS
+
+
+} // !namespace file
 
 #endif // !FILESERVICE_H

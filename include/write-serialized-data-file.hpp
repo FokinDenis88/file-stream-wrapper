@@ -13,7 +13,7 @@
 
 // write, read files, another service operations based on fstream
 namespace file {
-    
+
     // Size of array, vector for writing arrays in files
     template<typename ElemT>
     inline size_t SizeOfArray(const std::vector<ElemT>& array_p) {
@@ -41,7 +41,7 @@ namespace file {
                                      const SymbolT* const first_object_symbol, const std::streamsize object_size = sizeof(SymbolT),
                                      std::ios_base::openmode open_mode = OpenModeWriteBinaryAppend,
                                      const std::locale& locale = std::locale()) { // open_mode & locale is defined as default in forward declaration
-        static_assert(std::is_same_v<ByteT, unsigned char> || std::is_same_v<ByteT, std::byte>, 
+        static_assert(std::is_same_v<ByteT, unsigned char> || std::is_same_v<ByteT, std::byte>,
                       "ByteT can be only: unsigned char or std::byte");
         write_file_stream.imbue(locale);
 
