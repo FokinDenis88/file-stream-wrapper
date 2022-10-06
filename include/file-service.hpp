@@ -33,7 +33,7 @@ namespace file {
     inline void OpenFile(FileStreamT& file_stream, const std::string& file_path, std::ios_base::openmode open_mode = OpenModeReadFromBegin) {
         file_stream.open(file_path, open_mode);
         // !write_file_stream - ����������� ��������. ������������ fail()
-        if (file_stream.fail() || !(file_stream.is_open())) { throw ErrorOpenFile(); }
+        if (file_stream.fail() || !(file_stream.is_open())) { throw errors::OpenFileError(file_path); }
     }
 
     /// Opens file stream
@@ -49,7 +49,7 @@ namespace file {
     inline void CloseFile(FileStreamT& file_stream) {
         if (file_stream.is_open()) {
             file_stream.close();
-            if (file_stream.bad()) { throw ErrorCloseFile(); }
+            if (file_stream.bad()) { throw errors::CloseFileError(); }
         }
     }
 
@@ -67,7 +67,7 @@ namespace file {
     template<typename FileStreamT = std::ifstream>
     inline void SeekgFilePos(FileStreamT& file_stream, long pos) {
         if (file_stream.tellg() != pos) { // ������������ ������� � ����� �� ����������� �������� ������� � �����
-            file_stream.seekg(pos);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
+            file_stream.seekg(pos);    if (!(file_stream.good())) { throw errors::FileOperationError(); }
         }
     }
 
@@ -75,13 +75,13 @@ namespace file {
     template<typename FileStreamT = std::ifstream>
     inline void SeekgFilePos(FileStreamT& file_stream, long off = 0, std::ios_base::seekdir dir = std::ios_base::beg) {
         if (file_stream.tellg() != dir + off) { // ������������ ������� � ����� �� ������� dir � ������ ������ off
-            file_stream.seekg(off, dir);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
+            file_stream.seekg(off, dir);    if (!(file_stream.good())) { throw errors::FileOperationError(); }
         }
     }
     template<typename FileStreamT = std::ifstream>
     inline void SeekgFilePosEnd(FileStreamT& file_stream, long off = 0, std::ios_base::seekdir dir = std::ios_base::end) {
         if (file_stream.tellg() != dir + off) { // ������������ ������� � ����� �� ������� dir � ������ ������ off
-            file_stream.seekg(off, dir);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
+            file_stream.seekg(off, dir);    if (!(file_stream.good())) { throw errors::FileOperationError(); }
         }
     }
 
@@ -89,7 +89,7 @@ namespace file {
     template<typename FileStreamT = std::ifstream>
     inline void SeekpFilePos(FileStreamT& file_stream, long pos) {
         if (file_stream.tellp() != pos) { // ������������ ������� � ����� �� ����������� �������� ������� � �����
-            file_stream.seekp(pos);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
+            file_stream.seekp(pos);    if (!(file_stream.good())) { throw errors::FileOperationError(); }
         }
     }
 
@@ -97,14 +97,14 @@ namespace file {
     template<typename FileStreamT = std::ifstream>
     inline void SeekpFilePos(FileStreamT& file_stream, long off = 0, std::ios_base::seekdir dir = std::ios_base::beg) {
         if (file_stream.tellp() != dir + off) { // ������������ ������� � ����� �� ������� dir � ������ ������ off
-            file_stream.seekp(off, dir);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
+            file_stream.seekp(off, dir);    if (!(file_stream.good())) { throw errors::FileOperationError(); }
         }
     }
     /// No checks for file_stream is_open.
     template<typename FileStreamT = std::ifstream>
     inline void SeekpFilePosEnd(FileStreamT& file_stream, long off = 0, std::ios_base::seekdir dir = std::ios_base::end) {
         if (file_stream.tellp() != dir + off) { // ������������ ������� � ����� �� ������� dir � ������ ������ off
-            file_stream.seekp(off, dir);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
+            file_stream.seekp(off, dir);    if (!(file_stream.good())) { throw errors::FileOperationError(); }
         }
     }
 
@@ -112,25 +112,33 @@ namespace file {
     template<typename CharT = char, typename FileStreamT = std::ifstream>
     inline std::fpos<typename std::char_traits<CharT>::state_type>
     Tellg(FileStreamT& file_stream) {
-        std::fpos<typename std::char_traits<CharT>::state_type> pos{ file_stream.tellg() };
-        if (!file_stream) { throw ErrorFileOperation(); }
-        return pos;
+        if (file_stream && file_stream.is_open()) {
+            std::fpos<typename std::char_traits<CharT>::state_type> pos{ file_stream.tellg() };
+            bool bad = file_stream.bad();
+            bool good = file_stream.good();
+            bool eof = file_stream.eof();
+            bool fail = file_stream.fail();
+            if (!file_stream) { throw errors::FileOperationError(); }
+            return pos;
+        } else std::fpos<typename std::char_traits<CharT>::state_type>();
     }
 
     /// Tells put position in file
     template<typename CharT = char, typename FileStreamT = std::ofstream>
     inline std::fpos<typename std::char_traits<CharT>::state_type>
     Tellp(FileStreamT& file_stream) {
-        std::fpos<typename std::char_traits<CharT>::state_type> pos{ file_stream.tellp() };
-        if (!file_stream) { throw ErrorFileOperation(); }
-        return pos;
+        if (file_stream && file_stream.is_open()) {
+            std::fpos<typename std::char_traits<CharT>::state_type> pos{ file_stream.tellp() };
+            if (!file_stream) { throw errors::FileOperationError(); }
+            return pos;
+        } else std::fpos<typename std::char_traits<CharT>::state_type>();
     }
 
     ///
     template<typename FileStreamT>
     inline void FlushFile(FileStreamT& file_stream) { // default value in forward declaring section
         file_stream.flush();
-        if (!file_stream) { throw ErrorWriteFile(); }
+        if (!file_stream) { throw errors::WriteFileError(); }
     }
 
 
@@ -143,20 +151,20 @@ namespace file {
             "CharT can be only: char, unsigned char, wchar_t or std::byte");
         std::fpos<typename std::char_traits<CharT>::state_type> current;
         if (save_file_position) {
-            current = file_stream.tellg();               if (!(file_stream.good())) { throw ErrorFileOperation(); }
+            current = file_stream.tellg();               if (!(file_stream.good())) { throw errors::FileOperationError(); }
         }
         // �� �����������, �� �� ������ ������ ������������ ��������� � ������ �����
         if (file_stream.tellg() != 0) {
-            file_stream.seekg(0, std::ios_base::beg);    if (!(file_stream.good())) { throw ErrorFileOperation(); }
+            file_stream.seekg(0, std::ios_base::beg);    if (!(file_stream.good())) { throw errors::FileOperationError(); }
         }
 
         std::fpos<typename std::char_traits<CharT>::state_type> begin, end;
-        begin = file_stream.tellg();                     if (!(file_stream.good())) { throw ErrorFileOperation(); }
-        file_stream.seekg(0, std::ios_base::end);        if (!(file_stream.good())) { throw ErrorFileOperation(); }
-        end = file_stream.tellg();                       if (!(file_stream.good())) { throw ErrorFileOperation(); }
+        begin = file_stream.tellg();                     if (!(file_stream.good())) { throw errors::FileOperationError(); }
+        file_stream.seekg(0, std::ios_base::end);        if (!(file_stream.good())) { throw errors::FileOperationError(); }
+        end = file_stream.tellg();                       if (!(file_stream.good())) { throw errors::FileOperationError(); }
 
         if (save_file_position) {
-            file_stream.seekg(current);               if (!(file_stream.good())) { throw ErrorFileOperation(); }
+            file_stream.seekg(current);               if (!(file_stream.good())) { throw errors::FileOperationError(); }
         }
 
         return end - begin;
@@ -187,12 +195,12 @@ namespace file {
             std::vector<unsigned char> file_content{};
             if (size > 0) {
                 if (read_write_file_stream.tellg() != 0) { // ������������ ������� � ����� �� ������
-                    read_write_file_stream.seekg(0, std::ios_base::beg);    if (!(read_write_file_stream.good())) { throw ErrorFileOperation(); }
+                    read_write_file_stream.seekg(0, std::ios_base::beg);    if (!(read_write_file_stream.good())) { throw errors::FileOperationError(); }
                 }
 
                 file_content.resize(size);
                 read_write_file_stream.read(&file_content[0], size);
-                if (read_write_file_stream.bad()) { throw ErrorReadFile(); }
+                if (read_write_file_stream.bad()) { throw errors::ReadFileError(copy); }
             }
 
             CloseFile(read_write_file_stream);
@@ -216,7 +224,7 @@ namespace file {
     inline std::string ReadLineInFile(FileStreamT& file_stream) {
         std::basic_string<CharT> str{};
         std::getline(file_stream, str);
-        if (!file_stream) { throw ErrorReadFile(); }
+        if (!file_stream) { throw errors::ReadFileError(); }
 
         return str;
     }

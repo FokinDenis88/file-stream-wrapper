@@ -44,18 +44,18 @@ namespace file {
                 file_content.emplace_back(std::move(buffer)); // file_content.size() == 11
             }
         }
-        if (!read_file_stream) { throw ErrorReadFile(); }
+        if (!read_file_stream) { throw errors::ReadFileError(); }
 
         if (delete_r) { EraseRChar(file_content); }
         return file_content;
     }
-    
+
 
     // Бинарное неформатированное чтение файла по строкам
     // If there is sequence of chars \r\n; \r will be stored in returned value
     template <typename CharT = char>
-    std::vector<std::basic_string<CharT>> 
-    GetFileLines(const char* file_path, bool delete_r = false, 
+    std::vector<std::basic_string<CharT>>
+    GetFileLines(const char* file_path, bool delete_r = false,
                     const std::locale& locale = std::locale()) {
         static_assert(std::is_same<CharT, unsigned char>::value || std::is_same<CharT, char>::value,
                         "CharT can be only: unsigned char or char");

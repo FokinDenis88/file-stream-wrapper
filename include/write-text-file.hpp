@@ -26,7 +26,7 @@ namespace file {
 
         if (file_content.size() > 0) {
             write_file_stream << file_content; // не пропускать white space - пробел std::noskipws
-            if (write_file_stream.fail()) { throw ErrorWriteFile(); }
+            if (write_file_stream.fail()) { throw errors::WriteFileError(); }
         }
 
         // Запись информации непосредственно в файл
