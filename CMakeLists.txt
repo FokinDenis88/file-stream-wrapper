@@ -67,6 +67,7 @@ set(SUPPORT_SOURCE_FILTER
     src/serialization.cpp
 )
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 
 # Add source to this project's executable.
 add_executable(file-stream-wrapper ${SOURCES}

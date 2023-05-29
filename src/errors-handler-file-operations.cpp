@@ -1,24 +1,9 @@
 #include "errors-handler-file-operations.hpp"
 
-namespace file {
-
-    void HandleOpenFileError()
-    {
+namespace errors {
+    int FileOperationErrorHandle() {
     }
 
-    void HandleCloseFileError()
-    {
-    }
-
-    void HandleWriteFileError()
-    {
-    }
-
-    void HandleReadFileError()
-    {
-    }
-
-    void HandleFileOperationError()
-    {
+    int FileStreamIsClosed() {
     }
 }
