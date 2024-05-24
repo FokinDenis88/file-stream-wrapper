@@ -60,9 +60,9 @@ namespace file {
         }
     }
 
-    template<typename... ColumnT, size_t... Indeces>
-    inline void ConvertDataTuple(std::tuple<ColumnT...>& buffer_tuple, std::string(&buffer_str)[], std::index_sequence<Indeces...>) {
-        (ConvertDataOnIndexTuple<Indeces>(buffer_tuple, buffer_str), ...);
+    template<typename... ColumnT, size_t... Indexes>
+    inline void ConvertDataTuple(std::tuple<ColumnT...>& buffer_tuple, std::string(&buffer_str)[], std::index_sequence<Indexes...>) {
+        (ConvertDataOnIndexTuple<Indexes>(buffer_tuple, buffer_str), ...);
     }
 
     // Realization of formatted input
@@ -91,7 +91,7 @@ namespace file {
                 data_table.header.emplace_back(std::move((*i).str()));
                 ++column;
             }
-            if (column == columns_count) { 
+            if (column == columns_count) {
                 std::tuple<ColumnT...> buffer_tuple{};
                 std::string buffer_str[columns_count]{};
                 while (i != words_end) {
