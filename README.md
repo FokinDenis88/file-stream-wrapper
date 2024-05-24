@@ -1,8 +1,21 @@
 # File Stream Wrapper
 Standard c++ input/output file streams. Writing, Reading files.
 
+## Repository Web Pages
+[github](https://github.com/FokinDenis88/file-stream-wrapper)  
+[gitlab (main)](https://gitlab.com/FokinDenis88/file-stream-wrapper)  
+[gitverse (Russia)](https://gitverse.ru/FokinDenis88/file-stream-wrapper)
+
 ## Installation
-cmake -B build/visual-studio-cmake
+cmake -B build/visual-studio
+
+## Contact
+**Skype:** live:dragon8806  
+**Telegram:** https://t.me/Furious_Dragon_88  
+**VK (Russia):** https://vk.com/furious__dragon  
+**Discord:** ***ID:*** 1203018807162175522 fokin_denis_yurievich_  ***User Name:*** fokin_denis_yurievich_  
+**Email:** fokin-denis-88-code@ya.ru  
+**Gitter:** @fokindenis88_gitlab:gitter.im
 
 ## Support
 Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
